@@ -1,0 +1,6 @@
+{
+  "name": "The Threshold of July",
+  "description": "An exceptionally premium, interactive 18th birthday odyssey for Shashi, crafted with traditional elegance and modern iOS glassmorphism.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
