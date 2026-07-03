@@ -10,7 +10,7 @@ import PlayfulInterlude from './components/PlayfulInterlude';
 import MemoryGallery from './components/MemoryGallery';
 import GrandFinale from './components/GrandFinale';
 import CelebrationCanvas from './components/CelebrationCanvas';
-
+import { audio } from './utils/audio';
 export default function App() {
   const [currentPhase, setCurrentPhase] = useState<Phase>('LOCKED');
   const [isBypassed, setIsBypassed] = useState(false);
@@ -38,7 +38,16 @@ export default function App() {
   const triggerParticleBurst = () => {
     setParticleTrigger(true);
   };
-
+// What happens when the timer reaches 00:00:00!
+  const handleTimerExpire = () => {
+    triggerParticleBurst();
+    audio.playGoldenChime();
+    
+    setTimeout(() => {
+      setCurrentPhase('THRESHOLD');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2500);
+  };
   // Reset helper for testing/debugging purposes (essential for Melan)
   const handleReset = () => {
     setIsBypassed(false);
@@ -125,6 +134,7 @@ export default function App() {
               <LockedGate 
                 targetDate={targetDate} 
                 onOpenBypass={() => setIsBypassModalOpen(true)} 
+                onTimerExpire={handleTimerExpire}
               />
             </motion.div>
           )}
