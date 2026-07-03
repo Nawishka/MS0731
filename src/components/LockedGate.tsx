@@ -48,7 +48,7 @@ export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: 
           className="px-4 py-2 text-[10px] font-mono tracking-widest uppercase rounded-full glass-panel-light text-gold-300 border border-gold-500/20 hover:border-gold-400/50 cursor-pointer transition-all shadow-[0_0_15px_rgba(212, 175, 55, 0.15)]"
           id="test-bypass-trigger-btn"
         >
-          Enter Gate
+          Enter
         </motion.button>
       </div>
 
@@ -109,19 +109,19 @@ export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: 
               <Lock size={18} className="text-[#2d1d0c] mt-1" />
             </div>
           </motion.div>
-          {/* Circular rotating dashes resembling palace floral patterns */}
+          {/* Circular rotating dashes */}
           <div className="absolute inset-0 border border-dashed border-gold-400/20 rounded-full animate-spin-slow" />
         </div>
 
-        {/* Text Details */}
+        {/* Text Details - REPLACED WITH NORMAL, SWEET WORDS! */}
         <span className="font-sans text-[10px] tracking-[0.4em] text-gold-300 font-bold uppercase block mb-3">
-          THE PALACE GATEKEEPER
+          COUNTDOWN TO 18
         </span>
         <h2 className="font-display text-2xl md:text-3.5xl text-gold-50 tracking-wider font-semibold mb-4">
-          The Threshold of July
+          Shashi's 18th Birthday
         </h2>
         <p className="font-serif italic text-base text-gold-100/70 max-w-sm mx-auto mb-8">
-          "Our sacred golden portal lies sealed... waiting for the thirty-first day of July, when Shashi steps into beautiful eighteen."
+          "Counting down the seconds until July 31st. A special celebration waiting just for you, Shashi."
         </p>
 
         {/* Massive Ticking Countdown */}
@@ -138,10 +138,10 @@ export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: 
           ))}
         </div>
 
-        {/* Footer info */}
+        {/* Footer info - REPLACED WITH NORMAL WORDS! */}
         <div className="mt-8 flex items-center justify-center gap-2 text-[11px] text-gold-300/50 font-mono tracking-wider">
           <Shield size={12} className="text-gold-400/70" />
-          <span>Locked Realm • Synchronized to July 31 00:00 AM</span>
+          <span>Birthday Portal • Unlocking July 31, 2026 at Midnight</span>
         </div>
       </motion.div>
     </div>
