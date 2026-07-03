@@ -243,7 +243,7 @@ const playfulPhrases = [
                 ✨💛✨
               </motion.div>
               <h3 className="font-display text-3xl text-gold-300 font-bold tracking-wide">
-                My Beautiful Queen! I Knew You'd Say Yes! 😄
+                I Knew You'd Say Yes! 😄
               </h3>
               <p className="font-serif italic text-lg text-gold-100/90 max-w-sm mx-auto">
                 "Get ready for some of my absolute favorite moments with you..."
