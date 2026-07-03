@@ -70,7 +70,7 @@ export default function App() {
               <Star size={18} fill="currentColor" className="opacity-70" />
             </motion.div>
             <h1 className="font-display text-base md:text-lg text-gold-200 font-semibold tracking-[0.25em] uppercase">
-              For Mine!
+              For You, Shashi.
             </h1>
           </div>
 
