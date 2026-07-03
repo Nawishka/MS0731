@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, HelpCircle, Wind, Flame } from 'lucide-react';
+import { Sparkles, Wind, Flame } from 'lucide-react';
 import { DiyaState } from '../types';
 import { audio } from '../utils/audio';
 
@@ -49,11 +49,8 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
     return () => clearInterval(interval);
   }, [targetDate, isBypassed]);
 
-  // Handle Diya extinguishing
+  // Handle Diya extinguishing (Always works once on this page!)
   const extinguishDiya = (id: number) => {
-    if (!showInteractionPrompt && !isMidnight) return;
-
-    // Only play sound and update if the diya is still lit
     setDiyas((prev) => {
       const target = prev.find(d => d.id === id);
       if (target && target.isLit) {
@@ -63,13 +60,13 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
     });
   };
 
-  // Check if all diyas are extinguished
+  // Check if all diyas are extinguished - Guaranteed to unlock!
   useEffect(() => {
     const litDiyas = diyas.filter((d) => d.isLit);
-    if (litDiyas.length === 0 && (isMidnight || isBypassed)) {
+    if (litDiyas.length === 0) {
       triggerCinematicUnlock();
     }
-  }, [diyas, isMidnight, isBypassed]);
+  }, [diyas]);
 
   const triggerCinematicUnlock = () => {
     setFlashActive(true);
@@ -83,10 +80,9 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
     }, 1800);
   };
 
+  // Button click always shows the prompt now!
   const handleOpenDoorClick = () => {
-    if (isMidnight || isBypassed) {
-      setShowInteractionPrompt(true);
-    }
+    setShowInteractionPrompt(true);
   };
 
   return (
@@ -273,18 +269,13 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               onClick={handleOpenDoorClick}
-              disabled={!isMidnight && !isBypassed}
-              className={`w-full py-4 rounded-2xl font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all flex items-center justify-center gap-3 cursor-pointer ${
-                isMidnight || isBypassed
-                  ? 'glass-panel-gold text-gold-300 hover:text-white border border-gold-500/30 shadow-[0_8px_32px_0_rgba(212,175,55,0.15)] hover:shadow-[0_8px_32px_0_rgba(212,175,55,0.35)]'
-                  : 'bg-white/5 border border-white/5 text-gold-200/20 cursor-not-allowed'
-              }`}
+              className="w-full py-4 rounded-2xl font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all flex items-center justify-center gap-3 cursor-pointer glass-panel-gold text-gold-300 hover:text-white border border-gold-500/30 shadow-[0_8px_32px_0_rgba(212,175,55,0.15)] hover:shadow-[0_8px_32px_0_rgba(212,175,55,0.35)]"
               id="open-door-primary-btn"
             >
               <span>
-                {isMidnight || isBypassed ? 'Open the Door' : 'Waiting for Midnight'}
+                {isMidnight || isBypassed ? 'Open the Door' : 'Step Inside'}
               </span>
-              <Sparkles size={14} className={isMidnight || isBypassed ? 'text-gold-400 animate-pulse' : 'text-gold-200/10'} />
+              <Sparkles size={14} className="text-gold-400 animate-pulse" />
             </motion.button>
           ) : (
             <motion.div
