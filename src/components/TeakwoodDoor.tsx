@@ -49,7 +49,7 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
     return () => clearInterval(interval);
   }, [targetDate, isBypassed]);
 
-  // Handle Diya extinguishing (Always works once on this page!)
+  // Handle Diya extinguishing
   const extinguishDiya = (id: number) => {
     setDiyas((prev) => {
       const target = prev.find(d => d.id === id);
@@ -117,7 +117,7 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
           <div className="grid grid-cols-4 gap-3 max-w-sm mx-auto p-4 rounded-2xl glass-panel-gold border border-gold-500/20" id="countdown-timer">
             {Object.entries(timeLeft).map(([key, val]) => (
               <div key={key} className="text-center">
-                <div className="font-display text-2xl md:text-3xl text-gold-300 font-bold tracking-tight">
+                <div className="font-display text-3xl md:text-3xl text-gold-300 font-bold tracking-tight">
                   {String(val).padStart(2, '0')}
                 </div>
                 <div className="font-mono text-[9px] text-gold-100/50 uppercase tracking-widest mt-1">
