@@ -145,10 +145,10 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
               <div className="space-y-2">
                 <span className="font-sans text-[10px] tracking-[0.3em] text-gold-400 font-semibold uppercase flex items-center justify-center gap-1.5">
                   <Flower size={12} className="text-gold-400" />
-                  <span>Phase 02: Playful Interlude</span>
+                  <span>A Quick Question</span>
                 </span>
                 <h3 className="font-display text-2xl md:text-4xl text-white tracking-wide font-semibold mt-1">
-                  Melan's Sacred Paradox
+                  Ready for Memory Lane?
                 </h3>
               </div>
 
@@ -169,10 +169,10 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
               {/* The Question */}
               <div className="space-y-3">
                 <p className="font-serif italic text-2xl text-gold-100 leading-relaxed">
-                  "Are you ready to dive into our beautiful memories with me?"
+                  "Are you ready to take a look back at some of our favorite memories together?"
                 </p>
                 <p className="font-sans text-xs text-gold-200/45">
-                  A quiet proposal of hearts... Let us walk down memory lane together.
+                  Let's take a little walk down memory lane.
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                   id="love-yes-btn"
                 >
                   <Heart size={14} fill="currentColor" />
-                  <span>Yes, I will! 💖</span>
+                  <span>Yes, let's go! 💖</span>
                 </motion.button>
 
                 {/* NO (Evasive Negative Button) */}
@@ -203,7 +203,7 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                     className="px-6 py-3.5 rounded-2xl glass-panel-dark text-gold-200 hover:text-gold-400 border border-gold-500/20 hover:border-gold-400/50 hover:bg-amber-950/20 font-sans font-medium text-xs tracking-wider transition-all cursor-pointer select-none"
                     id="love-no-btn"
                   >
-                    No, I'm not ready... 🤫
+                    No, not yet... 🤫
                   </button>
                 </motion.div>
 
@@ -243,10 +243,10 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                 ✨💛✨
               </motion.div>
               <h3 className="font-display text-3xl text-gold-300 font-bold tracking-wide">
-                My Beautiful Queen!
+                My Beautiful Queen! I Knew You'd Say Yes! 😄
               </h3>
               <p className="font-serif italic text-lg text-gold-100/90 max-w-sm mx-auto">
-                "Our promise is forged in golden light. Melan's heart beats in tandem with Shashi's 18th year..."
+                "Get ready for some of my absolute favorite moments with you..."
               </p>
               
               <div className="pt-4">
@@ -255,7 +255,7 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                   transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
                   className="font-sans text-[10px] tracking-[0.25em] text-gold-400 uppercase font-semibold block"
                 >
-                  Entering Shashi's Memories ✦
+                  Loading Our Memories...
                 </motion.div>
               </div>
             </motion.div>
