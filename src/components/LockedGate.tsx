@@ -1,22 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Lock, Sparkles, Shield, Flower, Heart } from 'lucide-react';
 
 interface LockedGateProps {
   targetDate: Date;
   onOpenBypass: () => void;
+  onTimerExpire?: () => void;
 }
 
-export default function LockedGate({ targetDate, onOpenBypass }: LockedGateProps) {
+export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: LockedGateProps) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const hasExpiredRef = useRef(false);
 
   useEffect(() => {
     const calculateTime = () => {
       const now = new Date();
       const diff = targetDate.getTime() - now.getTime();
-
+      
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        if (!hasExpiredRef.current && onTimerExpire) {
+          hasExpiredRef.current = true;
+          onTimerExpire();
+        }
       } else {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -25,11 +31,10 @@ export default function LockedGate({ targetDate, onOpenBypass }: LockedGateProps
         setTimeLeft({ days, hours, minutes, seconds });
       }
     };
-
     calculateTime();
     const interval = setInterval(calculateTime, 1000);
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, [targetDate, onTimerExpire]);
 
   return (
     <div className="relative w-full min-h-[90vh] flex flex-col items-center justify-center text-center p-4" id="locked-gate-stage">
