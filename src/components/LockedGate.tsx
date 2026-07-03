@@ -110,13 +110,13 @@ export default function LockedGate({ targetDate, onOpenBypass }: LockedGateProps
 
         {/* Text Details */}
         <span className="font-sans text-[10px] tracking-[0.4em] text-gold-300 font-bold uppercase block mb-3">
-          THE PALACE GATEKEEPER
+          THE COUNTDOWN BEGINS
         </span>
         <h2 className="font-display text-2xl md:text-3.5xl text-gold-50 tracking-wider font-semibold mb-4">
-          The Threshold of July
+          Until Her Eighteenth Sunrise
         </h2>
         <p className="font-serif italic text-base text-gold-100/70 max-w-sm mx-auto mb-8">
-          "Our sacred golden portal lies sealed... waiting for the thirty-first day of July, when Shashi steps into beautiful eighteen."
+          Every second brings us closer to July 31—the day Shashi turns eighteen. A beautiful milestone, a new beginning, and a celebration of the incredible person she has become. Until that moment arrives, time keeps the promise.
         </p>
 
         {/* Massive Ticking Countdown */}
@@ -136,7 +136,7 @@ export default function LockedGate({ targetDate, onOpenBypass }: LockedGateProps
         {/* Footer info */}
         <div className="mt-8 flex items-center justify-center gap-2 text-[11px] text-gold-300/50 font-mono tracking-wider">
           <Shield size={12} className="text-gold-400/70" />
-          <span>Locked Realm • Synchronized to July 31 00:00 AM</span>
+          <span>Awaiting July 31 • Celebration Unlocks at Midnight</span>
         </div>
       </motion.div>
     </div>
