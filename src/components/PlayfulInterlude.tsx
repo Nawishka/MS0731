@@ -194,7 +194,7 @@ const playfulPhrases = [
                 <motion.div
                   animate={{ x: evasionOffset.x, y: evasionOffset.y }}
                   transition={{ type: 'spring', damping: 10, stiffness: 180 }}
-                  className="absolute z-20"
+                  className="relative z-20"
                 >
                   <button
                     onMouseEnter={handleNegativeApproach}
