@@ -15,16 +15,16 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
   const [clickCount, setClickCount] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const playfulPhrases = [
-    "Are you sure? 👀",
-    "Not an option, my queen! ✨",
-    "Melan says nope! 💞",
-    "Error: Memories await you! ❤️",
-    "Try clicking the other one! 😘",
-    "No way out! 😜",
-    "My heart is locked on Yes! 🌸",
-    "Hehehe, you must say Yes! 🤫"
-  ];
+const playfulPhrases = [
+  "Are you sure? ",
+  "Not an option! 😉",
+  "Nope, try again! ",
+  "You have to click Yes! ",
+  "Try clicking the other one! 😉",
+  "Nice try! 😄",
+  "No escaping the memories! ",
+  "Hehe, you know you want to say Yes! 🤭"
+];
 
   const handleNegativeApproach = () => {
     // Play evasive bubble/pop sound
