@@ -121,7 +121,7 @@ export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: 
           Shashi's 18th Birthday
         </h2>
         <p className="font-serif italic text-base text-gold-100/70 max-w-sm mx-auto mb-8">
-          "Behind this countdown is something I made only for you—a journey through our memories, little surprises, and words straight from my heart. I hope every page brings a smile, every photo brings back a moment, and every second of waiting makes what’s ahead even more special. A special celebration is waiting just for you, Shashi."
+          "Behind this countdown is something I made only for you—a journey through our memories, little surprises, and words straight from my heart. I hope every page brings a smile, every photo brings back a moment, and every second of waiting makes what’s ahead even more special."
         </p>
 
         {/* Massive Ticking Countdown */}
