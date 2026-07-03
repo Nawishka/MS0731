@@ -19,7 +19,7 @@ export default function App() {
   const [particleTrigger, setParticleTrigger] = useState(false);
 
   // Shashi's exact 18th Birthday: July 31, 2026 at midnight
-  const targetDate = new Date('2026-07-03T18:59:00');
+  const targetDate = new Date('2026-07-31T00:00:00');
 
   // Check if current date is past the target date on mount (Fixed loop trap!)
   useEffect(() => {
