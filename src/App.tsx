@@ -11,6 +11,7 @@ import MemoryGallery from './components/MemoryGallery';
 import GrandFinale from './components/GrandFinale';
 import CelebrationCanvas from './components/CelebrationCanvas';
 import { audio } from './utils/audio';
+
 export default function App() {
   const [currentPhase, setCurrentPhase] = useState<Phase>('LOCKED');
   const [isBypassed, setIsBypassed] = useState(false);
@@ -18,15 +19,15 @@ export default function App() {
   const [particleTrigger, setParticleTrigger] = useState(false);
 
   // Shashi's exact 18th Birthday: July 31, 2026 at midnight
-  const targetDate = new Date('2026-07-03T18:33:00');
+  const targetDate = new Date('2026-07-31T00:00:00');
 
-  // Check if current date is past the target date on mount
+  // Check if current date is past the target date on mount (Fixed loop trap!)
   useEffect(() => {
     const now = new Date();
-    if (now >= targetDate) {
+    if (now >= targetDate && currentPhase === 'LOCKED') {
       setCurrentPhase('THRESHOLD');
     }
-  }, [targetDate]);
+  }, [targetDate, currentPhase]);
 
   // Handle successful bypass authentication
   const handleBypassSuccess = () => {
@@ -38,7 +39,8 @@ export default function App() {
   const triggerParticleBurst = () => {
     setParticleTrigger(true);
   };
-// What happens when the timer reaches 00:00:00!
+
+  // What happens when the timer reaches 00:00:00!
   const handleTimerExpire = () => {
     triggerParticleBurst();
     audio.playGoldenChime();
@@ -48,6 +50,7 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2500);
   };
+
   // Reset helper for testing/debugging purposes (essential for Melan)
   const handleReset = () => {
     setIsBypassed(false);
