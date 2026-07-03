@@ -107,13 +107,13 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
       {/* Title Header with Countdown */}
       <div className="text-center mb-6 z-10">
         <span className="font-sans text-[11px] tracking-[0.25em] text-gold-400 font-semibold uppercase block mb-2">
-          THE TRANSITION OF TIME
+          JULY 31 IS HERE
         </span>
         <h2 className="font-display text-3xl md:text-5xl text-gold-100 tracking-wider font-semibold mb-4 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-          The Sealed Threshold
+          Happy 18th, Shashi!
         </h2>
         <p className="font-serif italic text-lg text-gold-200/60 max-w-md mx-auto mb-6">
-          "On the edge of July, Shashi stands at the gateway of golden memories..."
+          "The wait is finally over. Let's celebrate your special day together."
         </p>
 
         {/* Live Countdown in Gold Script */}
@@ -136,7 +136,7 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
             animate={{ scale: 1, opacity: 1 }}
             className="inline-block py-2 px-6 rounded-full glass-panel-gold border border-gold-500/40 text-gold-300 font-display text-sm uppercase tracking-widest font-semibold animate-pulse"
           >
-            ✦ The Threshold Has Passed ✦
+            ✦ IT'S TIME ✦
           </motion.div>
         )}
       </div>
@@ -282,7 +282,7 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
               id="open-door-primary-btn"
             >
               <span>
-                {isMidnight || isBypassed ? 'Open Shashi’s 18th Year' : 'Locked Until Midnight'}
+                {isMidnight || isBypassed ? 'Open the Door' : 'Waiting for Midnight'}
               </span>
               <Sparkles size={14} className={isMidnight || isBypassed ? 'text-gold-400 animate-pulse' : 'text-gold-200/10'} />
             </motion.button>
@@ -297,11 +297,11 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
             >
               <h5 className="font-display text-sm text-gold-300 font-semibold uppercase tracking-widest flex items-center justify-center gap-2 mb-2">
                 <Flame size={14} className="text-gold-400 animate-pulse" />
-                <span>Interaction Required</span>
+                <span>Quick Step</span>
                 <Flame size={14} className="text-gold-400 animate-pulse" />
               </h5>
               <p className="font-serif italic text-xs text-gold-100/80 leading-relaxed">
-                "The temple arches are glowing. Swipe, click, or hover over the golden clay lamps (diyas) to blow out the flames and step through the teakwood gate with me..."
+                "Just swipe, hover, or tap the little lamps to blow out the flames and open the door!"
               </p>
             </motion.div>
           )}
