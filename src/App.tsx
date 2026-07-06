@@ -7,6 +7,7 @@ import LockedGate from './components/LockedGate';
 import BypassModal from './components/BypassModal';
 import TeakwoodDoor from './components/TeakwoodDoor';
 import PlayfulInterlude from './components/PlayfulInterlude';
+import FirstChat from './components/FirstChat';
 import MemoryGallery from './components/MemoryGallery';
 import GrandFinale from './components/GrandFinale';
 import CelebrationCanvas from './components/CelebrationCanvas';
@@ -94,6 +95,8 @@ export default function App() {
             <span>•</span>
             <span className={`${currentPhase === 'PLAYFUL' ? 'text-gold-400 font-bold' : ''}`}>Interlude</span>
             <span>•</span>
+            <span className={`${currentPhase === 'FIRST_CHAT' ? 'text-gold-400 font-bold' : ''}`}>Origins</span>
+            <span>•</span>
             <span className={`${currentPhase === 'GALLERY' ? 'text-gold-400 font-bold' : ''}`}>Gallery</span>
             <span>•</span>
             <span className={`${currentPhase === 'FINALE' ? 'text-gold-400 font-bold' : ''}`}>Covenant</span>
@@ -171,6 +174,24 @@ export default function App() {
             >
               <PlayfulInterlude 
                 onSuccess={() => {
+                  setCurrentPhase('FIRST_CHAT');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }} 
+                triggerBurst={triggerParticleBurst}
+              />
+            </motion.div>
+          )}
+
+          {currentPhase === 'FIRST_CHAT' && (
+            <motion.div
+              key="first-chat"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8 }}
+            >
+              <FirstChat 
+                onProceed={() => {
                   setCurrentPhase('GALLERY');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }} 
