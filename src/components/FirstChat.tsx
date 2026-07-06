@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Sparkles, MessageCircle, Send, CheckCheck } from 'lucide-react';
+import { Heart, Sparkles, MessageCircle, Send, CheckCheck, ArrowRight } from 'lucide-react';
 import { audio } from '../utils/audio';
 
 interface FirstChatProps {
@@ -20,6 +20,7 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [chatComplete, setChatComplete] = useState<boolean>(false);
+  const [showTransitionModal, setShowTransitionModal] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // The EXACT, uncompressed, 1-to-1 original conversation!
@@ -189,6 +190,9 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
     },
   ];
 
+  // Look ahead to see who is sending the next message for 2-sided typing!
+  const nextSender = messages[visibleMessages]?.sender || 'shashi';
+
   // Auto-scroll to the bottom cleanly as new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -202,21 +206,20 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
         setIsTyping(false);
         setVisibleMessages((prev) => prev + 1);
         audio.playBubblePop(); // Play crisp iOS bubble pop!
-      }, 2600); // 2.6s delay gives comfortable reading time
+      }, 2600); 
 
       return () => clearTimeout(typingTimer);
     } else {
       const completeTimer = setTimeout(() => {
         setChatComplete(true);
         audio.playGoldenChime();
-        // Removed triggerBurst() here so it doesn't disturb the reading environment!
       }, 800);
       return () => clearTimeout(completeTimer);
     }
   }, [visibleMessages, messages.length]);
 
-  // Trigger celebration balloons ONLY when clicking the button to proceed!
-  const handleProceedClick = () => {
+  // Trigger final transition into Memory Gallery!
+  const handleFinalProceed = () => {
     triggerBurst();
     audio.playGoldenChime();
     onProceed();
@@ -225,6 +228,59 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
   return (
     <div className="relative w-full max-w-2xl mx-auto min-h-[85vh] px-4 py-8 flex flex-col justify-between" id="ios-chat-stage">
       
+      {/* Sweet Transition Modal over the chat when clicking the button! */}
+      <AnimatePresence>
+        {showTransitionModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="w-full max-w-md rounded-3xl glass-panel-dark p-8 text-center border border-gold-500/30 shadow-[0_0_50px_rgba(212,175,55,0.2)] relative overflow-hidden"
+            >
+              <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
+              
+              <div className="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-6 shadow-inner">
+                <Heart className="text-gold-400 animate-pulse" size={32} fill="currentColor" />
+              </div>
+
+              <span className="font-mono text-[10px] tracking-[0.3em] text-gold-400 font-semibold uppercase block mb-2">
+                HOW IT STARTED VS. NOW ✨
+              </span>
+              <h3 className="font-display text-2xl text-white font-bold mb-4">
+                From DMs to Lifetime Memories
+              </h3>
+              <p className="font-serif italic text-sm text-gold-100/80 leading-relaxed mb-8">
+                "That was how our story first started back in February... Now, let's take a look at some of my absolute favorite memories with you since that exact day!"
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={() => setShowTransitionModal(false)}
+                  className="w-full sm:w-1/3 py-3 rounded-xl glass-panel-light text-gold-300 font-sans text-xs uppercase tracking-wider hover:bg-white/10 transition-colors cursor-pointer"
+                >
+                  Back
+                </button>
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={handleFinalProceed}
+                  className="w-full sm:w-2/3 py-3 rounded-xl bg-gradient-to-r from-gold-600 via-amber-400 to-gold-500 text-black font-sans font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Let's Go! 🚀</span>
+                  <ArrowRight size={14} />
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* iOS-Style Header Bar */}
       <div className="sticky top-16 z-30 glass-panel-dark border-b border-gold-500/20 px-6 py-4 rounded-3xl mb-6 shadow-lg flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -291,17 +347,25 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
           })}
         </AnimatePresence>
 
-        {/* Live Typing Indicator */}
+        {/* Live 2-Sided Typing Indicator (Switches sides based on who is replying next!) */}
         {isTyping && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="flex items-center gap-1 glass-panel-dark px-4 py-3 rounded-2xl rounded-bl-xs w-16 border border-gold-500/20"
+            className={`flex flex-col ${nextSender === 'melan' ? 'items-end' : 'items-start'} w-full my-1`}
           >
-            <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-gold-400" />
-            <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-1.5 h-1.5 rounded-full bg-gold-400" />
-            <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+            <div
+              className={`flex items-center gap-1 px-4 py-3 rounded-2xl w-16 shadow-md ${
+                nextSender === 'melan'
+                  ? 'bg-gradient-to-r from-gold-600 to-amber-500 rounded-br-xs'
+                  : 'glass-panel-dark border border-gold-500/20 rounded-bl-xs'
+              }`}
+            >
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-black' : 'bg-gold-400'}`} />
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-black' : 'bg-gold-400'}`} />
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-black' : 'bg-gold-400'}`} />
+            </div>
           </motion.div>
         )}
 
@@ -309,21 +373,21 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
         <div ref={messagesEndRef} className="h-4" />
       </div>
 
-      {/* Footer Action Button to Memory Gallery */}
+      {/* Footer Action Button to Open Transition Pop-Up */}
       <div className="mt-6 pt-4 border-t border-white/5 text-center">
         <AnimatePresence>
           {chatComplete ? (
             <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={handleProceedClick}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-gold-600 via-amber-400 to-gold-500 text-black font-sans font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_45px_rgba(212,175,55,0.5)] transition-all cursor-pointer flex items-center justify-center gap-2"
+              onClick={() => setShowTransitionModal(true)}
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-600 via-amber-400 to-gold-500 text-black font-sans font-bold text-xs tracking-widest uppercase shadow-[0_0_25px_rgba(212,175,55,0.3)] hover:shadow-[0_0_35px_rgba(212,175,55,0.5)] transition-all cursor-pointer inline-flex items-center gap-2"
               id="proceed-from-chat-btn"
             >
-              <span>And Look Where We Are Now... See The Memories!</span>
-              <Heart size={14} fill="currentColor" />
+              <Sparkles size={14} className="animate-spin-slow" />
+              <span>See Our Memories Now 💖</span>
             </motion.button>
           ) : (
             <div className="text-[11px] font-mono text-gold-400/50 animate-pulse flex items-center justify-center gap-2 py-3">
