@@ -15,29 +15,25 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
   const [clickCount, setClickCount] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
 
-const playfulPhrases = [
-  "Are you sure? ",
-  "Not an option! 😉",
-  "Nope, try again! ",
-  "You have to click Yes! ",
-  "Try clicking the other one! 😉",
-  "Nice try! 😄",
-  "No escaping the memories! ",
-  "Hehe, you know you want to say Yes! 🤭"
-];
+  const playfulPhrases = [
+    "Are you sure? ",
+    "Not an option! 😉",
+    "Nope, try again! ",
+    "You have to click Yes! ",
+    "Try clicking the other one! 😉",
+    "Nice try! 😄",
+    "No escaping the memories! ",
+    "Hehe, you know you want to say Yes! 🤭"
+  ];
 
   const handleNegativeApproach = () => {
-    // Play evasive bubble/pop sound
     audio.playBubblePop();
-
-    // Leap the button to a new random coordinate relative to its origin
-    const rangeX = 220; // safe horizontal distance
-    const rangeY = 120; // safe vertical distance
+    const rangeX = 220;
+    const rangeY = 120;
     
     let newX = (Math.random() - 0.5) * rangeX;
     let newY = (Math.random() - 0.5) * rangeY;
 
-    // Guarantee the button moves at least 60px from current offset to feel snappy
     if (Math.abs(newX - evasionOffset.x) < 60) {
       newX += newX > 0 ? 60 : -60;
     }
@@ -47,7 +43,6 @@ const playfulPhrases = [
 
     setEvasionOffset({ x: newX, y: newY });
     
-    // Rotate playful phrases
     const randomPhrase = playfulPhrases[Math.floor(Math.random() * playfulPhrases.length)];
     setTooltip(randomPhrase);
     setShowTooltip(true);
@@ -57,9 +52,8 @@ const playfulPhrases = [
   const handlePositiveClick = () => {
     setIsSuccess(true);
     audio.playGoldenChime();
-    triggerBurst(); // Spawn beautiful particles
+    triggerBurst();
     
-    // Wait briefly for particles to fill the screen, then transition to Gallery
     setTimeout(() => {
       onSuccess();
     }, 2500);
@@ -67,7 +61,6 @@ const playfulPhrases = [
 
   return (
     <div className="relative w-full max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[80vh] px-4 py-12" id="playful-interlude-stage">
-      {/* Floating starry elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <motion.div
@@ -94,7 +87,6 @@ const playfulPhrases = [
           </motion.div>
         ))}
 
-        {/* Small floating hearts */}
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={`heart-${i}`}
@@ -120,7 +112,6 @@ const playfulPhrases = [
         ))}
       </div>
 
-      {/* Main Glassmorphic Challenge Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.92, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -128,7 +119,6 @@ const playfulPhrases = [
         className="w-full max-w-xl rounded-3xl glass-panel-dark p-8 md:p-12 text-center relative z-20 overflow-hidden shadow-[0_20px_50px_rgba(212,175,55,0.12)] border border-gold-500/25"
         id="playful-game-card"
       >
-        {/* Decorative elements */}
         <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
         <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-gold-500/5 rounded-full blur-2xl" />
         <div className="absolute -top-16 -right-16 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl" />
@@ -141,7 +131,6 @@ const playfulPhrases = [
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              {/* Header Info */}
               <div className="space-y-2">
                 <span className="font-sans text-[10px] tracking-[0.3em] text-gold-400 font-semibold uppercase flex items-center justify-center gap-1.5">
                   <Flower size={12} className="text-gold-400" />
@@ -152,7 +141,6 @@ const playfulPhrases = [
                 </h3>
               </div>
 
-              {/* Heart Graphic */}
               <div className="relative py-4 flex justify-center">
                 <motion.div
                   animate={{ scale: [1, 1.15, 1] }}
@@ -166,7 +154,6 @@ const playfulPhrases = [
                 </div>
               </div>
 
-              {/* The Question */}
               <div className="space-y-3">
                 <p className="font-serif italic text-2xl text-gold-100 leading-relaxed">
                   "Are you ready to take a look back at some of our favorite memories together?"
@@ -176,9 +163,7 @@ const playfulPhrases = [
                 </p>
               </div>
 
-              {/* Interactive Button Group */}
               <div className="relative min-h-[140px] flex items-center justify-center gap-6 mt-8">
-                {/* YES (Positive Button) */}
                 <motion.button
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
@@ -190,7 +175,6 @@ const playfulPhrases = [
                   <span>Yes, let's go! 💖</span>
                 </motion.button>
 
-                {/* NO (Evasive Negative Button) */}
                 <motion.div
                   animate={{ x: evasionOffset.x, y: evasionOffset.y }}
                   transition={{ type: 'spring', damping: 10, stiffness: 180 }}
@@ -207,7 +191,6 @@ const playfulPhrases = [
                   </button>
                 </motion.div>
 
-                {/* Playful Floating Evasion Tooltip */}
                 <AnimatePresence>
                   {showTooltip && (
                     <motion.div
@@ -228,7 +211,6 @@ const playfulPhrases = [
               </div>
             </motion.div>
           ) : (
-            /* Succession Celebration Screen */
             <motion.div
               key="game-success"
               initial={{ opacity: 0, scale: 0.95 }}
