@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Heart, Sparkles, MessageCircle, Send, CheckCheck } from 'lucide-react';
 import { audio } from '../utils/audio';
@@ -20,91 +20,181 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [chatComplete, setChatComplete] = useState<boolean>(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // The conversation sorted in proper chronological order!
+  // The EXACT, uncompressed, 1-to-1 original conversation!
   const messages: ChatMessage[] = [
     {
       id: 'm1',
       sender: 'melan',
-      text: 'mchn oya ara muthushay samadhi ekka hitiya girl neda 👀',
+      text: 'mchn oya ara muthushay samadhi ekka hitiya girl neda',
       time: 'Feb 10, 1:16 AM',
       isStoryReply: true,
     },
     {
       id: 'm2',
       sender: 'shashi',
-      text: 'Ooo... oya kauda 🥲',
+      text: 'Ooo',
       time: 'Feb 12, 6:27 PM',
     },
     {
       id: 'm3',
-      sender: 'melan',
-      text: 'ah ekane dekala purudu gathiyak thibba hinda ahwe 😌',
-      time: 'Feb 13, 1:28 AM',
+      sender: 'shashi',
+      text: 'oya kauda 🥲',
+      time: 'Feb 12, 6:27 PM',
     },
     {
       id: 'm4',
-      sender: 'shashi',
-      text: 'Aaah... oya ape wayaseda?',
-      time: 'Feb 13, 4:19 AM',
+      sender: 'melan',
+      text: 'ah ekane dekala purudu gathiyak thibba hinda ahwe',
+      time: 'Feb 13, 1:28 AM',
     },
     {
       id: 'm5',
       sender: 'shashi',
-      text: 'Anee mt mathaka nane 🥲',
-      time: 'Feb 13, 4:20 AM',
+      text: 'Aaah',
+      time: 'Feb 13, 4:19 AM',
     },
     {
       id: 'm6',
-      sender: 'melan',
-      text: 'niyamay 🥲😂 komahari ub (ub kiwwata awlak nhne pit ekata ah) 9 di giya ned',
-      time: 'Feb 13, 4:25 AM',
+      sender: 'shashi',
+      text: 'oya ape wayaseda',
+      time: 'Feb 13, 4:19 AM',
     },
     {
       id: 'm7',
       sender: 'shashi',
-      text: 'Anee sorry 🥲 Ow bn!',
-      time: 'Feb 13, 4:26 AM',
+      text: 'Anee mt mathaka nane',
+      time: 'Feb 13, 4:20 AM',
     },
     {
       id: 'm8',
+      sender: 'melan',
+      text: 'niyamay 🥲😂',
+      time: 'Feb 13, 4:25 AM',
+    },
+    {
+      id: 'm9',
+      sender: 'melan',
+      text: 'komahari ub (ub kiwwata awlak nhne pit ekata ah) 9 di giya ned',
+      time: 'Feb 13, 4:26 AM',
+    },
+    {
+      id: 'm10',
+      sender: 'shashi',
+      text: 'Anee sorry 🥲',
+      time: 'Feb 13, 4:26 AM',
+    },
+    {
+      id: 'm11',
+      sender: 'shashi',
+      text: 'Ow bn',
+      time: 'Feb 13, 4:26 AM',
+    },
+    {
+      id: 'm12',
       sender: 'melan',
       text: 'mata mataka widiyata itapasse missing 😂',
       time: 'Feb 13, 4:27 AM',
     },
     {
-      id: 'm9',
+      id: 'm13',
       sender: 'shashi',
-      text: 'Ape clz ekeda hitiye? Danna kattiya danan hitiye ithin mn aaai yana bawa 😁 Mokadda 9di hitapu clz eka?',
+      text: 'Ape clz ekeda hitiye',
       time: 'Feb 13, 4:27 AM',
     },
     {
-      id: 'm10',
+      id: 'm14',
+      sender: 'shashi',
+      text: 'Danna kattiya danan hitiye ithin mn aaai yana bawa 😁',
+      time: 'Feb 13, 4:27 AM',
+    },
+    {
+      id: 'm15',
+      sender: 'shashi',
+      text: 'Mokadda 9di hitapu clz eka',
+      time: 'Feb 13, 4:28 AM',
+    },
+    {
+      id: 'm16',
       sender: 'melan',
-      text: 'F... E eke idiye 😂 wihiluwak kre, nh nh neme!',
+      text: 'F',
       time: 'Feb 13, 4:31 AM',
     },
     {
-      id: 'm11',
+      id: 'm17',
       sender: 'shashi',
-      text: 'Eeee 🥲 Ape eked! Mn eee kale ubw danan hitiyd bn 🥲',
+      text: 'Eeee 🥲',
+      time: 'Feb 13, 4:31 AM',
+    },
+    {
+      id: 'm18',
+      sender: 'shashi',
+      text: 'Ape eked',
+      time: 'Feb 13, 4:31 AM',
+    },
+    {
+      id: 'm19',
+      sender: 'melan',
+      text: '😌😂 nh nh neme',
       time: 'Feb 13, 4:32 AM',
     },
     {
-      id: 'm12',
+      id: 'm20',
       sender: 'melan',
-      text: 'nh bn mn dekala thiyanawa e puruddata kawda me baladdi matak une 😂',
-      time: 'Feb 13, 4:33 AM',
+      text: 'wihiluwak kre',
+      time: 'Feb 13, 4:32 AM',
     },
     {
-      id: 'm13',
+      id: 'm21',
+      sender: 'melan',
+      text: 'mn E eke idiye 😂',
+      time: 'Feb 13, 4:32 AM',
+    },
+    {
+      id: 'm22',
+      sender: 'shashi',
+      text: 'Aaah 🥲',
+      time: 'Feb 13, 4:32 AM',
+    },
+    {
+      id: 'm23',
+      sender: 'melan',
+      text: 'ow ow penw sujathian kiyala bio eke dan innw',
+      time: 'Feb 13, 4:32 AM',
+    },
+    {
+      id: 'm24',
+      sender: 'shashi',
+      text: 'Mn eee kale ubw danan hitiyd bn 🥲',
+      time: 'Feb 13, 4:32 AM',
+    },
+    {
+      id: 'm25',
+      sender: 'melan',
+      text: '😂',
+      time: 'Feb 13, 4:32 AM',
+    },
+    {
+      id: 'm26',
       sender: 'shashi',
       text: 'Aneee meee 😅',
       time: 'Feb 13, 4:33 AM',
     },
+    {
+      id: 'm27',
+      sender: 'melan',
+      text: 'nh bn mn dekala thiyanawa e puruddata kawda me baladdi matak une',
+      time: 'Feb 13, 4:33 AM',
+    },
   ];
 
-  // Animated message revealing loop with iOS sound triggers
+  // Auto-scroll to the bottom cleanly as new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [visibleMessages, isTyping]);
+
+  // Comfortable 2.6 second delay between messages for easy reading!
   useEffect(() => {
     if (visibleMessages < messages.length) {
       setIsTyping(true);
@@ -112,18 +202,25 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
         setIsTyping(false);
         setVisibleMessages((prev) => prev + 1);
         audio.playBubblePop(); // Play crisp iOS bubble pop!
-      }, 1200); // 1.2s delay between messages
+      }, 2600); // 2.6s delay gives comfortable reading time
 
       return () => clearTimeout(typingTimer);
     } else {
       const completeTimer = setTimeout(() => {
         setChatComplete(true);
         audio.playGoldenChime();
-        triggerBurst();
+        // Removed triggerBurst() here so it doesn't disturb the reading environment!
       }, 800);
       return () => clearTimeout(completeTimer);
     }
-  }, [visibleMessages, messages.length, triggerBurst]);
+  }, [visibleMessages, messages.length]);
+
+  // Trigger celebration balloons ONLY when clicking the button to proceed!
+  const handleProceedClick = () => {
+    triggerBurst();
+    audio.playGoldenChime();
+    onProceed();
+  };
 
   return (
     <div className="relative w-full max-w-2xl mx-auto min-h-[85vh] px-4 py-8 flex flex-col justify-between" id="ios-chat-stage">
@@ -151,7 +248,7 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
       </div>
 
       {/* Chat Messages Arena */}
-      <div className="flex-1 space-y-4 my-4 px-2 overflow-y-auto max-h-[60vh] pr-2">
+      <div className="flex-1 space-y-3 my-4 px-2 overflow-y-auto max-h-[60vh] pr-2">
         <div className="text-center my-4">
           <span className="font-mono text-[10px] text-gold-300/40 bg-white/5 px-3 py-1 rounded-full uppercase tracking-widest">
             February 10, 2026
@@ -164,7 +261,7 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
             return (
               <motion.div
                 key={msg.id}
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                initial={{ opacity: 0, y: 15, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: 'spring', damping: 20, stiffness: 200 }}
                 className={`flex flex-col ${isMe ? 'items-end' : 'items-start'} w-full`}
@@ -176,7 +273,7 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
                 )}
                 
                 <div
-                  className={`max-w-[80%] md:max-w-[70%] rounded-2xl px-4 py-3 text-xs md:text-sm shadow-md leading-relaxed ${
+                  className={`max-w-[80%] md:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs md:text-sm shadow-md leading-relaxed ${
                     isMe
                       ? 'bg-gradient-to-r from-gold-600 to-amber-500 text-black font-medium rounded-br-xs'
                       : 'glass-panel-dark text-gold-100 border border-gold-500/20 rounded-bl-xs'
@@ -207,6 +304,9 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
             <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-1.5 h-1.5 rounded-full bg-gold-400" />
           </motion.div>
         )}
+
+        {/* Auto-scroll target anchor */}
+        <div ref={messagesEndRef} className="h-4" />
       </div>
 
       {/* Footer Action Button to Memory Gallery */}
@@ -218,7 +318,7 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={onProceed}
+              onClick={handleProceedClick}
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-gold-600 via-amber-400 to-gold-500 text-black font-sans font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_45px_rgba(212,175,55,0.5)] transition-all cursor-pointer flex items-center justify-center gap-2"
               id="proceed-from-chat-btn"
             >
