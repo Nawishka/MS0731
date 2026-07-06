@@ -19,7 +19,7 @@ export default function BypassModal({ isOpen, onClose, onSuccess }: BypassModalP
     const normalized = password.trim().toLowerCase();
     
     // Accept standard romantic/custom bypass keys
-    if (normalized === '00005' || normalized === 'shashi18' || normalized === 'july31') {
+    if (normalized === '55550' || normalized === 'shashi18' || normalized === 'july31') {
       setError(false);
       audio.playGoldenChime();
       onSuccess();
