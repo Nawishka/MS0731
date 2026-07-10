@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Sparkles, MessageCircle, Send, CheckCheck, ArrowRight } from 'lucide-react';
+import { Heart, Sparkles, MessageCircle, Send, CheckCheck, ArrowRight, Moon } from 'lucide-react';
 import { audio } from '../utils/audio';
 
 interface FirstChatProps {
@@ -91,34 +91,37 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
         {showTransitionModal && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-rose-50/70 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#070514]/80 backdrop-blur-md"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
-              className="w-full max-w-md rounded-3xl bg-white/90 backdrop-blur-xl p-8 text-center border border-white shadow-[0_20px_60px_rgba(255,192,203,0.5)] relative overflow-hidden"
+              className="w-full max-w-md rounded-[2rem] bg-[#110826]/95 backdrop-blur-xl p-8 text-center border border-cyan-500/20 shadow-[0_0_50px_rgba(6,182,212,0.15)] relative overflow-hidden"
             >
-              <div className="w-16 h-16 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center mx-auto mb-6 shadow-inner">
-                <Heart className="text-rose-400 animate-pulse fill-rose-100" size={32} />
+              <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-fuchsia-600/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="w-16 h-16 rounded-full bg-[#0a0514] border border-cyan-500/30 flex items-center justify-center mx-auto mb-6 shadow-[inset_0_0_15px_rgba(6,182,212,0.1)]">
+                <Moon className="text-cyan-400 animate-pulse drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" size={32} />
               </div>
-              <span className="font-sans text-[10px] tracking-[0.25em] text-rose-400 font-bold uppercase block mb-2">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-cyan-400 font-bold uppercase block mb-2 drop-shadow-[0_0_5px_rgba(6,182,212,0.3)]">
                 HOW IT STARTED VS. NOW ✨
               </span>
-              <h3 className="font-serif text-2xl text-slate-800 font-medium mb-4">
-                From DMs to Lifetime Memories
+              <h3 className="font-display text-2xl text-purple-50 font-medium mb-4">
+                From DMs to Magical Memories
               </h3>
-              <p className="font-sans text-sm text-slate-500 leading-relaxed mb-8">
-                That was how our story first started back in February... Now, let's take a look at some of my absolute favorite memories with you since that exact day!
+              <p className="font-serif italic text-sm text-purple-200/70 leading-relaxed mb-8">
+                "That was how our story first started back in February... Now, let's take a look at some of my absolute favorite memories with you since that exact day!"
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setShowTransitionModal(false)}
-                  className="w-full sm:w-1/3 py-3 rounded-xl bg-white text-slate-500 border border-slate-200 font-sans text-xs uppercase font-bold tracking-widest hover:bg-slate-50 transition-colors"
+                  className="w-full sm:w-1/3 py-3 rounded-xl bg-[#0a0514] text-purple-400 border border-purple-500/30 font-mono text-xs uppercase font-bold tracking-widest hover:bg-[#130b2e] transition-colors"
                 >
                   Back
                 </button>
                 <motion.button
                   whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={handleFinalProceed}
-                  className="w-full sm:w-2/3 py-3 rounded-xl bg-gradient-to-r from-rose-400 to-pink-400 text-white font-sans font-bold text-xs uppercase tracking-widest shadow-[0_8px_20px_rgba(255,192,203,0.5)] flex items-center justify-center gap-2"
+                  className="w-full sm:w-2/3 py-3 rounded-xl bg-gradient-to-r from-fuchsia-600/80 via-purple-600/80 to-cyan-600/80 text-white font-mono font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(192,38,211,0.3)] flex items-center justify-center gap-2 border border-white/10"
                 >
                   <span>Let's Go! 🚀</span>
                   <ArrowRight size={14} />
@@ -129,30 +132,30 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
         )}
       </AnimatePresence>
 
-      <div className="sticky top-16 z-30 bg-white/70 backdrop-blur-xl border border-white px-6 py-4 rounded-[2rem] mb-6 shadow-[0_10px_30px_rgba(255,192,203,0.2)] flex items-center justify-between">
+      <div className="sticky top-16 z-30 bg-[#0f0826]/80 backdrop-blur-xl border border-purple-500/20 px-6 py-4 rounded-[2rem] mb-6 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-rose-300 to-pink-200 flex items-center justify-center text-white font-serif text-lg font-medium shadow-md border border-white">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-600 to-fuchsia-600 flex items-center justify-center text-white font-display text-lg font-medium shadow-[0_0_10px_rgba(6,182,212,0.3)] border border-white/20">
               S
             </div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full" />
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-[#0f0826] rounded-full drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]" />
           </div>
           <div>
-            <h3 className="font-sans font-bold text-sm text-slate-800 flex items-center gap-1.5">
+            <h3 className="font-display text-sm text-purple-50 flex items-center gap-1.5 tracking-wide">
               <span>Shashi</span>
-              <Sparkles size={12} className="text-pink-400" />
+              <Sparkles size={12} className="text-fuchsia-400 drop-shadow-[0_0_5px_rgba(217,70,239,0.5)]" />
             </h3>
-            <span className="font-sans text-[10px] font-medium text-slate-400 block">Instagram • Feb 2026</span>
+            <span className="font-mono text-[10px] text-purple-400/60 block">Instagram • Feb 2026</span>
           </div>
         </div>
-        <div className="font-sans font-semibold text-[9px] uppercase tracking-widest text-rose-500 bg-rose-50 px-3 py-1.5 rounded-full border border-rose-100">
+        <div className="font-mono font-semibold text-[9px] uppercase tracking-widest text-cyan-400 bg-[#130b2e] px-3 py-1.5 rounded-full border border-cyan-500/20 shadow-inner">
           Where It All Began ✨
         </div>
       </div>
 
       <div className="flex-1 space-y-3 my-4 px-2 overflow-y-auto max-h-[60vh] pr-2">
         <div className="text-center my-4">
-          <span className="font-sans font-semibold text-[9px] text-slate-400 bg-white/60 backdrop-blur-sm px-3 py-1 rounded-full uppercase tracking-widest">
+          <span className="font-mono font-semibold text-[9px] text-purple-400/50 bg-[#130b2e]/60 backdrop-blur-sm px-3 py-1 rounded-full uppercase tracking-widest border border-purple-500/10">
             February 10, 2026
           </span>
         </div>
@@ -166,22 +169,22 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
                 className={`flex flex-col ${isMe ? 'items-end' : 'items-start'} w-full`}
               >
                 {msg.isStoryReply && (
-                  <span className="text-[9px] font-sans font-medium text-slate-400 mb-1 px-2 flex items-center gap-1">
+                  <span className="text-[9px] font-mono font-medium text-cyan-500/60 mb-1 px-2 flex items-center gap-1">
                     <MessageCircle size={10} /> Replied to their story
                   </span>
                 )}
                 <div
-                  className={`max-w-[80%] md:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs md:text-sm shadow-sm leading-relaxed ${
+                  className={`max-w-[80%] md:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs md:text-sm shadow-md leading-relaxed ${
                     isMe
-                      ? 'bg-gradient-to-r from-rose-400 to-pink-400 text-white font-medium rounded-br-xs border border-rose-300'
-                      : 'bg-white text-slate-700 border border-slate-100 rounded-bl-xs'
+                      ? 'bg-gradient-to-r from-purple-600/90 to-cyan-600/90 text-white font-medium rounded-br-xs border border-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.15)]'
+                      : 'bg-[#130b2e] text-purple-100 border border-fuchsia-500/20 rounded-bl-xs shadow-[0_0_15px_rgba(217,70,239,0.05)]'
                   }`}
                 >
                   {msg.text}
                 </div>
                 <div className="flex items-center gap-1 mt-1 px-1">
-                  <span className="text-[9px] font-sans font-medium text-slate-300">{msg.time}</span>
-                  {isMe && <CheckCheck size={12} className="text-rose-400" />}
+                  <span className="text-[9px] font-mono font-medium text-purple-400/40">{msg.time}</span>
+                  {isMe && <CheckCheck size={12} className="text-cyan-400" />}
                 </div>
               </motion.div>
             );
@@ -196,13 +199,13 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
             <div
               className={`flex items-center gap-1 px-4 py-3 rounded-2xl w-16 shadow-sm border ${
                 nextSender === 'melan'
-                  ? 'bg-rose-50 border-rose-100 rounded-br-xs'
-                  : 'bg-white border-slate-100 rounded-bl-xs'
+                  ? 'bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border-cyan-500/30 rounded-br-xs'
+                  : 'bg-[#130b2e] border-fuchsia-500/20 rounded-bl-xs'
               }`}
             >
-              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-rose-300" />
-              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-1.5 h-1.5 rounded-full bg-rose-300" />
-              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-1.5 h-1.5 rounded-full bg-rose-300" />
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-cyan-300' : 'bg-fuchsia-400'}`} />
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-cyan-300' : 'bg-fuchsia-400'}`} />
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className={`w-1.5 h-1.5 rounded-full ${nextSender === 'melan' ? 'bg-cyan-300' : 'bg-fuchsia-400'}`} />
             </div>
           </motion.div>
         )}
@@ -215,14 +218,14 @@ export default function FirstChat({ onProceed, triggerBurst }: FirstChatProps) {
             <motion.button
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => setShowTransitionModal(true)}
-              className="px-8 py-3.5 rounded-full bg-white text-rose-500 font-sans font-bold text-xs tracking-widest uppercase shadow-[0_10px_30px_rgba(255,192,203,0.4)] border border-rose-100 transition-all cursor-pointer inline-flex items-center gap-2"
+              className="px-8 py-3.5 rounded-full bg-[#130b2e] text-cyan-400 font-mono font-bold text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(6,182,212,0.2)] border border-cyan-500/30 transition-all cursor-pointer inline-flex items-center gap-2 hover:bg-[#1a0f3c] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]"
             >
-              <Sparkles size={14} className="animate-spin-slow text-pink-400" />
+              <Sparkles size={14} className="animate-spin-slow text-fuchsia-400" />
               <span>See Our Memories Now 💖</span>
             </motion.button>
           ) : (
-            <div className="text-[10px] font-sans font-semibold text-slate-400 animate-pulse flex items-center justify-center gap-2 py-3">
-              <Send size={12} className="animate-bounce text-rose-300" />
+            <div className="text-[10px] font-mono font-semibold text-purple-400/50 animate-pulse flex items-center justify-center gap-2 py-3">
+              <Send size={12} className="animate-bounce text-cyan-500/50" />
               <span>Reliving our first conversations...</span>
             </div>
           )}
