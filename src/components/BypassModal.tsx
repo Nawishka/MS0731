@@ -14,7 +14,7 @@ export default function BypassModal({ isOpen, onClose, onSuccess }: BypassModalP
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const VALID_PASSWORDS = ['SHASHI18', 'JULY31', 'MELAN'];
+  const VALID_PASSWORDS = ['696969'];
 
   useEffect(() => {
     if (isOpen) {
