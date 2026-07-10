@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, RefreshCw, Flower2 } from 'lucide-react';
+import { Heart, RefreshCw, Sparkles } from 'lucide-react';
 
 import { Phase } from './types';
 import LockedGate from './components/LockedGate';
@@ -54,11 +54,12 @@ export default function App() {
   };
 
   return (
-    // NEW ROMANTIC BACKGROUND: Soft pinks, white clouds, elegant text
-    <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-100 overflow-x-hidden font-sans text-slate-700 selection:bg-rose-200 selection:text-rose-900" id="main-odyssey-wrapper">
+    // NEW ENCHANTED BACKGROUND: Deep purples, cosmic indigos, bioluminescent glows
+    <div className="relative min-h-screen bg-[#070514] font-sans text-purple-100 selection:bg-cyan-500/30 selection:text-cyan-100 overflow-x-hidden" id="main-odyssey-wrapper">
       
-      {/* Soft overlay gradient to blend everything */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/60 via-transparent to-rose-100/30 z-0" />
+      {/* Deep atmospheric radial gradient */}
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/30 via-[#070514] to-[#070514] z-0" />
+      <div className="fixed inset-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 z-0 mix-blend-overlay" />
 
       <CelebrationCanvas 
         active={currentPhase === 'GALLERY' || currentPhase === 'FINALE'} 
@@ -66,39 +67,39 @@ export default function App() {
         onBurstComplete={() => setParticleTrigger(false)}
       />
 
-      {/* Light Frosted Glass Header */}
-      <header className="sticky top-0 w-full z-40 bg-white/50 backdrop-blur-xl border-b border-white/80 px-6 py-4 shadow-[0_4px_20px_rgba(255,192,203,0.3)]" id="global-header">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+      {/* Dark Frosted Glass Header */}
+      <header className="sticky top-0 w-full z-40 bg-[#0f0826]/60 backdrop-blur-xl border-b border-purple-500/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" id="global-header">
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           
-          <div className="flex items-center gap-2 text-rose-500">
+          <div className="flex items-center gap-2 text-cyan-400">
             <motion.div 
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
             >
-              <Flower2 size={20} className="drop-shadow-sm" strokeWidth={1.5} />
+              <Sparkles size={18} className="drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
             </motion.div>
-            <h1 className="font-serif text-lg md:text-xl font-medium tracking-[0.15em] uppercase text-rose-800">
+            <h1 className="font-display text-base md:text-lg font-medium tracking-[0.2em] uppercase text-purple-100">
               For You, Shashi.
             </h1>
           </div>
 
-          <div className="hidden sm:flex items-center gap-3 px-5 py-2 rounded-full bg-white/60 border border-rose-100 shadow-inner text-[10px] font-sans font-semibold tracking-widest text-slate-400">
-            <span className={`${currentPhase === 'LOCKED' ? 'text-rose-500 drop-shadow-sm' : ''}`}>Gatekeeper</span>
-            <span className="text-rose-200">•</span>
-            <span className={`${currentPhase === 'THRESHOLD' ? 'text-rose-500 animate-pulse' : ''}`}>Threshold</span>
-            <span className="text-rose-200">•</span>
-            <span className={`${currentPhase === 'PLAYFUL' ? 'text-rose-500' : ''}`}>Interlude</span>
-            <span className="text-rose-200">•</span>
-            <span className={`${currentPhase === 'FIRST_CHAT' ? 'text-rose-500' : ''}`}>Origins</span>
-            <span className="text-rose-200">•</span>
-            <span className={`${currentPhase === 'GALLERY' ? 'text-rose-500' : ''}`}>Gallery</span>
-            <span className="text-rose-200">•</span>
-            <span className={`${currentPhase === 'FINALE' ? 'text-rose-500' : ''}`}>Covenant</span>
+          <div className="hidden sm:flex items-center gap-3 px-5 py-2 rounded-full bg-[#1a0f3c]/50 border border-purple-500/20 shadow-inner text-[10px] font-mono tracking-widest text-purple-400/50">
+            <span className={`${currentPhase === 'LOCKED' ? 'text-cyan-400 drop-shadow-[0_0_5px_rgba(6,182,212,0.5)]' : ''}`}>Gatekeeper</span>
+            <span className="text-purple-800">•</span>
+            <span className={`${currentPhase === 'THRESHOLD' ? 'text-fuchsia-400 animate-pulse drop-shadow-[0_0_5px_rgba(232,121,249,0.5)]' : ''}`}>Threshold</span>
+            <span className="text-purple-800">•</span>
+            <span className={`${currentPhase === 'PLAYFUL' ? 'text-cyan-400' : ''}`}>Interlude</span>
+            <span className="text-purple-800">•</span>
+            <span className={`${currentPhase === 'FIRST_CHAT' ? 'text-fuchsia-400' : ''}`}>Origins</span>
+            <span className="text-purple-800">•</span>
+            <span className={`${currentPhase === 'GALLERY' ? 'text-cyan-400' : ''}`}>Gallery</span>
+            <span className="text-purple-800">•</span>
+            <span className={`${currentPhase === 'FINALE' ? 'text-fuchsia-400' : ''}`}>Covenant</span>
           </div>
 
           <div className="flex items-center gap-3">
             {isBypassed && (
-              <span className="text-[9px] font-sans font-bold tracking-widest text-pink-500 uppercase px-3 py-1 rounded-full bg-pink-50 border border-pink-200 shadow-sm">
+              <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-400 uppercase px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
                 Unlocked
               </span>
             )}
@@ -107,7 +108,7 @@ export default function App() {
                 whileHover={{ scale: 1.05, rotate: 180 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleReset}
-                className="p-2 rounded-full bg-white/80 text-rose-400 hover:text-rose-600 border border-rose-100 shadow-sm transition-all cursor-pointer"
+                className="p-2 rounded-full bg-[#1a0f3c]/80 text-purple-400 hover:text-cyan-400 border border-purple-500/30 shadow-sm transition-all cursor-pointer"
                 title="Reset Portal State"
               >
                 <RefreshCw size={14} />
@@ -159,11 +160,11 @@ export default function App() {
 
       <BypassModal isOpen={isBypassModalOpen} onClose={() => setIsBypassModalOpen(false)} onSuccess={handleBypassSuccess} />
 
-      <footer className="w-full text-center py-8 text-[11px] font-sans font-medium text-slate-400 border-t border-white/60 mt-12 bg-white/30 backdrop-blur-sm select-none">
-        <div className="flex justify-center items-center gap-1.5">
-          <Heart size={12} className="text-rose-400 animate-pulse fill-rose-100" />
+      <footer className="w-full text-center py-8 text-[10px] font-mono tracking-widest text-purple-500/50 border-t border-purple-900/40 mt-12 bg-[#070514]/80 backdrop-blur-md select-none">
+        <div className="flex justify-center items-center gap-2">
+          <Heart size={10} className="text-cyan-500/40 animate-pulse fill-cyan-500/10" />
           <span>Formed with Pure Love • Melan to Shashi • July 31, 2026</span>
-          <Heart size={12} className="text-rose-400 animate-pulse fill-rose-100" />
+          <Heart size={10} className="text-fuchsia-500/40 animate-pulse fill-fuchsia-500/10" />
         </div>
       </footer>
     </div>
