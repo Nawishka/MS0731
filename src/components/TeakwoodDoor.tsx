@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Wind, Flame, Heart } from 'lucide-react';
+import { Sparkles, Wind, Flame, Heart, Moon } from 'lucide-react';
 import { DiyaState } from '../types';
 import { audio } from '../utils/audio';
 
@@ -17,7 +17,7 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
   const [isOpening, setIsOpening] = useState(false);
   const [flashActive, setFlashActive] = useState(false);
 
-  // Initialize 5 soft romantic candles (keeping the 'diyas' variable name so the code works perfectly)
+  // Initialize 5 magical glowing candles
   const [diyas, setDiyas] = useState<DiyaState[]>([
     { id: 1, isLit: true, x: 20, y: 85 },
     { id: 2, isLit: true, x: 35, y: 88 },
@@ -89,30 +89,30 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
             animate={{ opacity: [0, 1, 1, 0] }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.8, times: [0, 0.4, 0.8, 1] }}
-            className="fixed inset-0 bg-gradient-to-r from-rose-100 via-white to-pink-100 z-50 pointer-events-none"
+            className="fixed inset-0 bg-gradient-to-r from-cyan-900 via-white to-fuchsia-900 z-50 pointer-events-none mix-blend-screen"
           />
         )}
       </AnimatePresence>
 
       <div className="text-center mb-6 z-10">
-        <span className="font-sans text-[10px] tracking-[0.3em] text-rose-400 font-bold uppercase block mb-2">
+        <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-400 font-bold uppercase block mb-2 drop-shadow-[0_0_5px_rgba(6,182,212,0.5)]">
           JULY 31 IS HERE
         </span>
-        <h2 className="font-serif text-4xl md:text-5xl text-slate-800 font-medium mb-4 drop-shadow-sm">
+        <h2 className="font-display text-4xl md:text-5xl text-purple-50 font-medium mb-4 drop-shadow-[0_0_15px_rgba(217,70,239,0.3)]">
           Happy 18th, Shashi!
         </h2>
-        <p className="font-sans text-sm text-slate-500 max-w-sm mx-auto mb-6 leading-relaxed">
-          The wait is finally over. Let's step into this new chapter together.
+        <p className="font-serif italic text-sm text-purple-200/70 max-w-sm mx-auto mb-6 leading-relaxed">
+          "The wait is finally over. Let's step into this magical new chapter together."
         </p>
 
         {!isMidnight ? (
-          <div className="grid grid-cols-4 gap-3 max-w-sm mx-auto p-4 rounded-3xl bg-white/70 border border-white shadow-[0_10px_30px_rgba(255,192,203,0.3)]">
+          <div className="grid grid-cols-4 gap-3 max-w-sm mx-auto p-4 rounded-3xl bg-[#0a0514]/80 border border-purple-500/20 shadow-[inset_0_0_20px_rgba(6,182,212,0.1)]">
             {Object.entries(timeLeft).map(([key, val]) => (
-              <div key={key} className="text-center">
-                <div className="font-serif text-3xl text-rose-500 font-medium">
+              <div key={key} className="text-center relative">
+                <div className="font-display text-3xl text-fuchsia-400 font-medium drop-shadow-[0_0_8px_rgba(217,70,239,0.4)]">
                   {String(val).padStart(2, '0')}
                 </div>
-                <div className="font-sans text-[9px] text-slate-400 uppercase tracking-widest mt-1 font-semibold">
+                <div className="font-mono text-[9px] text-purple-400/60 uppercase tracking-widest mt-1 font-semibold">
                   {key}
                 </div>
               </div>
@@ -122,34 +122,34 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-rose-50 border border-rose-200 text-rose-500 font-sans text-xs uppercase tracking-widest font-bold shadow-sm animate-pulse"
+            className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-[#130b2e]/80 border border-cyan-500/40 text-cyan-400 font-mono text-xs uppercase tracking-widest font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)] animate-pulse"
           >
-            <Heart size={14} className="fill-rose-200" />
+            <Sparkles size={14} className="text-fuchsia-400" />
             <span>IT'S TIME</span>
-            <Heart size={14} className="fill-rose-200" />
+            <Sparkles size={14} className="text-fuchsia-400" />
           </motion.div>
         )}
       </div>
 
-      {/* Elegant White French Doors */}
-      <div className="relative w-full max-w-[320px] aspect-[3/4.5] md:max-w-[360px] rounded-t-[100px] border-[10px] border-white/90 overflow-hidden shadow-[0_25px_60px_-15px_rgba(255,192,203,0.5)] bg-rose-50/50 flex mb-8">
+      {/* Enchanted Dark Glass Portal */}
+      <div className="relative w-full max-w-[320px] aspect-[3/4.5] md:max-w-[360px] rounded-t-[100px] border-[6px] border-[#1a0f3c]/90 overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] bg-[#070514] flex mb-8 ring-1 ring-cyan-500/20">
         
         {/* LEFT DOOR */}
         <motion.div
           animate={isOpening ? { x: '-100%', rotateY: -45, skewY: -5, opacity: 0.1 } : { x: 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
-          className="relative w-1/2 h-full bg-white/80 backdrop-blur-sm border-r border-rose-100 origin-left flex items-center justify-end pr-2 overflow-hidden shadow-inner"
+          className="relative w-1/2 h-full bg-[#0a0514]/90 backdrop-blur-md border-r border-cyan-500/30 origin-left flex items-center justify-end pr-2 overflow-hidden shadow-inner"
           style={{ transformStyle: 'preserve-3d' }}
         >
-          <div className="absolute inset-4 border border-rose-200/50 rounded-tl-[70px] pointer-events-none flex flex-col justify-between p-4">
-            <span className="text-[10px] text-rose-300 font-sans font-bold">✦</span>
-            <span className="text-[10px] text-rose-300 font-sans font-bold">✦</span>
+          <div className="absolute inset-4 border border-fuchsia-500/20 rounded-tl-[70px] pointer-events-none flex flex-col justify-between p-4">
+            <span className="text-[10px] text-cyan-500/50 font-mono font-bold">✦</span>
+            <span className="text-[10px] text-cyan-500/50 font-mono font-bold">✦</span>
           </div>
           <motion.div 
             whileHover={{ scale: 1.1 }}
-            className="w-10 h-10 rounded-full border border-rose-200 bg-white flex items-center justify-center shadow-md z-20 cursor-pointer"
+            className="w-10 h-10 rounded-full border border-cyan-500/40 bg-[#130b2e] flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.2)] z-20 cursor-pointer"
           >
-            <div className="w-4 h-4 rounded-full bg-rose-100 border border-rose-200" />
+            <div className="w-4 h-4 rounded-full bg-cyan-400/80 border border-cyan-300 drop-shadow-[0_0_5px_rgba(6,182,212,0.8)]" />
           </motion.div>
         </motion.div>
 
@@ -157,32 +157,32 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
         <motion.div
           animate={isOpening ? { x: '100%', rotateY: 45, skewY: 5, opacity: 0.1 } : { x: 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
-          className="relative w-1/2 h-full bg-white/80 backdrop-blur-sm border-l border-rose-100 origin-right flex items-center justify-start pl-2 overflow-hidden shadow-inner"
+          className="relative w-1/2 h-full bg-[#0a0514]/90 backdrop-blur-md border-l border-cyan-500/30 origin-right flex items-center justify-start pl-2 overflow-hidden shadow-inner"
           style={{ transformStyle: 'preserve-3d' }}
         >
-          <div className="absolute inset-4 border border-rose-200/50 rounded-tr-[70px] pointer-events-none flex flex-col justify-between p-4">
-            <span className="text-[10px] text-rose-300 font-sans font-bold">✦</span>
-            <span className="text-[10px] text-rose-300 font-sans font-bold">✦</span>
+          <div className="absolute inset-4 border border-fuchsia-500/20 rounded-tr-[70px] pointer-events-none flex flex-col justify-between p-4">
+            <span className="text-[10px] text-cyan-500/50 font-mono font-bold">✦</span>
+            <span className="text-[10px] text-cyan-500/50 font-mono font-bold">✦</span>
           </div>
           <motion.div 
             whileHover={{ scale: 1.1 }}
-            className="w-10 h-10 rounded-full border border-rose-200 bg-white flex items-center justify-center shadow-md z-20 cursor-pointer"
+            className="w-10 h-10 rounded-full border border-cyan-500/40 bg-[#130b2e] flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.2)] z-20 cursor-pointer"
           >
-            <div className="w-4 h-4 rounded-full bg-rose-100 border border-rose-200" />
+            <div className="w-4 h-4 rounded-full bg-cyan-400/80 border border-cyan-300 drop-shadow-[0_0_5px_rgba(6,182,212,0.8)]" />
           </motion.div>
         </motion.div>
 
-        {/* Ambient Void Behind Doors (Soft glowing light) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-rose-50 to-pink-100 -z-10 flex flex-col items-center justify-center p-6 text-center">
-          <Sparkles className="text-rose-400 animate-spin-slow mb-4 opacity-60" size={48} />
-          <h4 className="font-serif text-2xl text-rose-500 font-medium">Shashi's 18th</h4>
-          <p className="font-sans text-xs text-rose-400/80 mt-2">A beautiful journey awaits...</p>
+        {/* Ambient Void Behind Doors */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#130b2e] via-[#0a0514] to-[#070514] -z-10 flex flex-col items-center justify-center p-6 text-center">
+          <Moon className="text-cyan-400 animate-pulse mb-4 opacity-60 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" size={48} />
+          <h4 className="font-display text-2xl text-purple-100 font-medium tracking-wide">Shashi's 18th</h4>
+          <p className="font-serif italic text-xs text-fuchsia-400/80 mt-2">A magical realm awaits...</p>
         </div>
       </div>
 
-      {/* Soft Candles Stage */}
+      {/* Magical Bioluminescent Candles Stage */}
       <div className="relative w-full max-w-md h-24 mb-8">
-        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-rose-200 to-transparent blur-sm" />
+        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent blur-sm" />
         
         {diyas.map((diya) => (
           <div
@@ -193,10 +193,10 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
             onTouchStart={() => extinguishDiya(diya.id)}
             onClick={() => extinguishDiya(diya.id)}
           >
-            {/* White/Pink Candle Base */}
-            <div className="relative w-8 h-10 bg-gradient-to-b from-white to-rose-50 rounded-sm border border-rose-100 shadow-[0_4px_10px_rgba(255,192,203,0.3)] flex items-center justify-center">
-              <div className="absolute -top-[2px] w-8 h-[4px] bg-rose-100 rounded-full" />
-              <div className="w-1 h-2 bg-slate-800/40 rounded-full absolute -top-1" />
+            {/* Dark Enchanted Candle Base */}
+            <div className="relative w-8 h-10 bg-gradient-to-b from-[#1a0f3c] to-[#0a0514] rounded-sm border border-cyan-500/20 shadow-[0_4px_10px_rgba(0,0,0,0.5)] flex items-center justify-center">
+              <div className="absolute -top-[2px] w-8 h-[4px] bg-purple-900 rounded-full" />
+              <div className="w-1 h-2 bg-cyan-900 rounded-full absolute -top-1" />
             </div>
 
             <AnimatePresence>
@@ -205,13 +205,14 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
                   initial={{ scale: 0 }} animate={{ scale: [1, 1.1, 0.9, 1.05, 1] }} exit={{ scale: 0, y: -10, opacity: 0, transition: { duration: 0.3 } }}
                   className="absolute -top-6 left-1/2 -translate-x-1/2 w-4 h-6 origin-bottom flex flex-col items-center"
                 >
-                  <div className="w-2.5 h-5 bg-gradient-to-t from-orange-300 via-yellow-200 to-white rounded-full animate-flicker relative shadow-[0_0_10px_rgba(255,165,0,0.5)]" />
-                  <div className="absolute -inset-3 rounded-full bg-orange-200/20 blur-md pointer-events-none transition-all" />
+                  {/* Bioluminescent blue/purple flame */}
+                  <div className="w-2.5 h-6 bg-gradient-to-t from-cyan-400 via-fuchsia-400 to-white rounded-full animate-flicker relative shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+                  <div className="absolute -inset-4 rounded-full bg-cyan-500/20 blur-md pointer-events-none transition-all" />
                 </motion.div>
               ) : (
                 <motion.div
                   initial={{ opacity: 0.8, y: -5, scale: 0.8 }} animate={{ opacity: 0, y: -25, scale: 1.4, x: Math.random() * 8 - 4 }}
-                  className="absolute -top-8 left-1/2 -translate-x-1/2 text-slate-400 pointer-events-none"
+                  className="absolute -top-8 left-1/2 -translate-x-1/2 text-purple-400/50 pointer-events-none"
                 >
                   <Wind size={12} className="animate-pulse" />
                 </motion.div>
@@ -226,23 +227,23 @@ export default function TeakwoodDoor({ isBypassed, targetDate, onUnlock }: Teakw
           {!showInteractionPrompt ? (
             <motion.button
               key="initial-btn" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} onClick={handleOpenDoorClick}
-              className="w-full py-4 rounded-2xl font-sans font-bold text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-3 cursor-pointer bg-white text-rose-500 border border-white hover:border-rose-200 shadow-[0_8px_30px_rgba(255,192,203,0.4)]"
+              className="w-full py-4 rounded-2xl font-mono font-bold text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-3 cursor-pointer bg-[#130b2e]/80 text-cyan-400 border border-purple-500/30 hover:border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] backdrop-blur-md"
             >
-              <span>{isMidnight || isBypassed ? 'Open the Door' : 'Step Inside'}</span>
-              <Sparkles size={14} className="text-pink-400 animate-pulse" />
+              <span>{isMidnight || isBypassed ? 'Open the Portal' : 'Step Inside'}</span>
+              <Sparkles size={14} className="text-fuchsia-400 animate-pulse drop-shadow-[0_0_5px_rgba(217,70,239,0.8)]" />
             </motion.button>
           ) : (
             <motion.div
               key="prompt-overlay" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white/80 backdrop-blur-md rounded-2xl p-5 text-center border border-white shadow-[0_10px_30px_rgba(255,192,203,0.3)]"
+              className="bg-[#0a0514]/90 backdrop-blur-md rounded-2xl p-5 text-center border border-cyan-500/20 shadow-[0_0_30px_rgba(6,182,212,0.15)]"
             >
-              <h5 className="font-sans text-xs text-rose-500 font-bold uppercase tracking-widest flex items-center justify-center gap-2 mb-2">
-                <Flame size={14} className="text-orange-400 animate-pulse" />
+              <h5 className="font-mono text-xs text-fuchsia-400 font-bold uppercase tracking-widest flex items-center justify-center gap-2 mb-2">
+                <Flame size={14} className="text-cyan-400 animate-pulse" />
                 <span>Quick Step</span>
-                <Flame size={14} className="text-orange-400 animate-pulse" />
+                <Flame size={14} className="text-cyan-400 animate-pulse" />
               </h5>
-              <p className="font-sans text-xs text-slate-500 leading-relaxed">
-                Swipe, hover, or tap the little candles to blow out the flames and open the door!
+              <p className="font-serif italic text-xs text-purple-200/70 leading-relaxed">
+                "Swipe, hover, or tap the magical flames to blow them out and open the portal!"
               </p>
             </motion.div>
           )}
