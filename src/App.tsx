@@ -28,6 +28,15 @@ export default function App() {
     }
   }, [targetDate, currentPhase]);
 
+  // 🌟 NEW FIX: Automatically scroll to the top smoothly whenever the phase changes! 🌟
+  useEffect(() => {
+    const scrollTimer = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100); // 100ms delay gives the old page time to fade out first
+    
+    return () => clearTimeout(scrollTimer);
+  }, [currentPhase]);
+
   const handleBypassSuccess = () => {
     setIsBypassed(true);
     setIsBypassModalOpen(false);
@@ -43,27 +52,22 @@ export default function App() {
     audio.playGoldenChime();
     setTimeout(() => {
       setCurrentPhase('THRESHOLD');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2500);
   };
 
   const handleReset = () => {
     setIsBypassed(false);
     setCurrentPhase('LOCKED');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="relative min-h-screen font-sans text-purple-50 selection:bg-fuchsia-500/30 overflow-x-hidden" id="main-odyssey-wrapper">
       
-      {/* 🌟 NEW RICH BACKGROUND: Beautiful forest image with cozy, colorful glass blurs 🌟 */}
+      {/* 🌟 Rich Background: Beautiful forest image with cozy, colorful glass blurs 🌟 */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* Base magical nature photo */}
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-80" />
-        {/* Cozy vibrant color overlays (Indigos, purples, warm pinks) */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/60 via-purple-900/50 to-fuchsia-900/60 mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b041a] via-transparent to-transparent opacity-80" />
-        {/* Premium Glass Blur Effect applied to the background */}
         <div className="absolute inset-0 backdrop-blur-[14px]" />
       </div>
 
@@ -134,19 +138,19 @@ export default function App() {
 
           {currentPhase === 'PLAYFUL' && (
             <motion.div key="playful-game" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.8 }}>
-              <PlayfulInterlude onSuccess={() => { setCurrentPhase('FIRST_CHAT'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} triggerBurst={triggerParticleBurst} />
+              <PlayfulInterlude onSuccess={() => { setCurrentPhase('FIRST_CHAT'); }} triggerBurst={triggerParticleBurst} />
             </motion.div>
           )}
 
           {currentPhase === 'FIRST_CHAT' && (
             <motion.div key="first-chat" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.8 }}>
-              <FirstChat onProceed={() => { setCurrentPhase('GALLERY'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} triggerBurst={triggerParticleBurst} />
+              <FirstChat onProceed={() => { setCurrentPhase('GALLERY'); }} triggerBurst={triggerParticleBurst} />
             </motion.div>
           )}
 
           {currentPhase === 'GALLERY' && (
             <motion.div key="memory-gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>
-              <MemoryGallery onProceed={() => { setCurrentPhase('FINALE'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+              <MemoryGallery onProceed={() => { setCurrentPhase('FINALE'); }} />
             </motion.div>
           )}
 
