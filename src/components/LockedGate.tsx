@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Lock, Heart, Flower, Sparkles } from 'lucide-react';
+import { Lock, Heart, Flower2, Sparkles } from 'lucide-react';
 
 interface LockedGateProps {
   targetDate: Date;
@@ -41,96 +41,92 @@ export default function LockedGate({ targetDate, onOpenBypass, onTimerExpire }: 
       
       <div className="absolute top-4 right-4 z-50">
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onOpenBypass}
-          className="px-5 py-2.5 text-[10px] font-mono font-bold tracking-widest uppercase rounded-full bg-[#130b2e]/60 backdrop-blur-md text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 hover:bg-[#1a0f3c]/80 cursor-pointer transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+          whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onOpenBypass}
+          className="px-5 py-2.5 text-[10px] font-sans font-bold tracking-widest uppercase rounded-full bg-white/10 backdrop-blur-xl text-white border border-white/20 hover:bg-white/20 cursor-pointer transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)]"
         >
           Enter
         </motion.button>
       </div>
 
-      {/* Magical Floating Environment: Bioluminescent particles and deep forest flora */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+      {/* 🦋 COZY ANIMATIONS: Butterflies, Fireflies, and Flowers 🦋 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {[...Array(18)].map((_, i) => (
           <motion.div
             key={i}
             animate={{
-              y: [0, -60, 0],
-              x: [0, i % 2 === 0 ? 20 : -20, 0],
-              opacity: [0.1, 0.5, 0.1],
-              rotate: [0, i % 2 === 0 ? 45 : -45, 0]
+              y: [0, -80, 0],
+              x: [0, i % 2 === 0 ? 30 : -30, 0],
+              opacity: [0.2, 0.8, 0.2],
             }}
-            transition={{ duration: 7 + i, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 8 + i, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute"
-            style={{ top: `${(i * 12) % 85 + 5}%`, left: `${(i * 23) % 90 + 5}%` }}
+            style={{ top: `${(i * 15) % 85 + 5}%`, left: `${(i * 27) % 90 + 5}%` }}
           >
-            {i % 3 === 0 ? (
-              <Flower size={18 + i * 2} className="text-fuchsia-500/20 drop-shadow-[0_0_8px_rgba(217,70,239,0.3)]" />
-            ) : i % 3 === 1 ? (
-              <Sparkles size={14 + i * 2} className="text-cyan-400/30 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]" />
+            {i % 4 === 0 ? (
+              // Flapping Butterfly
+              <motion.div animate={{ rotateY: [0, 60, 0] }} transition={{ duration: 0.3, repeat: Infinity }} className="text-xl drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+                🦋
+              </motion.div>
+            ) : i % 4 === 1 ? (
+              <Flower2 size={18 + i * 2} className="text-fuchsia-300/60 drop-shadow-md" />
+            ) : i % 4 === 2 ? (
+              // Glowing Firefly
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-200 shadow-[0_0_12px_4px_rgba(251,191,36,0.6)] animate-pulse" />
             ) : (
-              <Heart size={12 + i * 2} className="text-purple-500/20 fill-purple-600/10" />
+              <Sparkles size={14 + i * 2} className="text-cyan-300/40 drop-shadow-sm" />
             )}
           </motion.div>
         ))}
       </div>
 
-      {/* Main Enchanted Frosted Card */}
+      {/* Main Glassmorphism Card */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        className="w-full max-w-lg rounded-[2.5rem] bg-[#130b2e]/60 backdrop-blur-xl p-8 md:p-12 relative overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] border border-purple-500/20"
+        initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
+        className="w-full max-w-lg rounded-[2.5rem] bg-white/10 backdrop-blur-2xl p-8 md:p-12 relative overflow-hidden shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 z-10"
       >
-        {/* Bioluminescent corner glows */}
-        <div className="absolute -top-16 -left-16 w-40 h-40 bg-fuchsia-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+        <div className="absolute -top-16 -left-16 w-40 h-40 bg-fuchsia-400/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
         
-        {/* Magical Motif */}
-        <div className="mx-auto w-24 h-24 rounded-full bg-[#0a0514]/80 border border-purple-500/30 flex items-center justify-center mb-8 relative shadow-[inset_0_0_20px_rgba(168,85,247,0.1)]">
+        {/* Glass Motif */}
+        <div className="mx-auto w-24 h-24 rounded-full bg-white/5 border border-white/20 flex items-center justify-center mb-8 relative shadow-inner backdrop-blur-md">
           <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="text-fuchsia-400 flex items-center justify-center relative drop-shadow-[0_0_10px_rgba(217,70,239,0.5)]"
+            animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            className="text-white flex items-center justify-center relative drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
           >
-            <Flower size={44} className="opacity-80" strokeWidth={1.5} />
+            <Flower2 size={44} className="opacity-90" strokeWidth={1.5} />
             <div className="absolute">
-              <Lock size={16} className="text-cyan-300 mt-1 drop-shadow-[0_0_5px_rgba(6,182,212,0.8)]" />
+              <Lock size={16} className="text-white mt-1" />
             </div>
           </motion.div>
-          {/* Subtle spinning outer ring */}
-          <div className="absolute inset-0 border border-dashed border-cyan-500/20 rounded-full animate-spin-slow" />
+          <div className="absolute inset-0 border border-dashed border-white/30 rounded-full animate-spin-slow" />
         </div>
 
-        <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-400 font-bold uppercase block mb-3 drop-shadow-[0_0_5px_rgba(6,182,212,0.4)]">
+        <span className="font-sans text-[10px] tracking-[0.4em] text-fuchsia-200 font-bold uppercase block mb-3 drop-shadow-md">
           COUNTDOWN TO 18
         </span>
-        <h2 className="font-display text-3xl md:text-4xl text-purple-50 font-medium mb-4 tracking-wide">
+        <h2 className="font-serif text-3xl md:text-4xl text-white font-medium mb-4 tracking-wide drop-shadow-md">
           Shashi's 18th Birthday
         </h2>
-        <p className="font-serif italic text-sm text-purple-200/60 max-w-sm mx-auto mb-8 leading-relaxed">
-          "Counting down the seconds until July 31st. A magical celebration waiting just for you, Shashi."
+        <p className="font-sans text-sm text-purple-100/80 max-w-sm mx-auto mb-8 leading-relaxed">
+          Counting down the seconds until July 31st. A beautiful, magical celebration waiting just for you.
         </p>
 
-        {/* Deep Glowing Countdown Container */}
-        <div className="grid grid-cols-4 gap-3 p-5 rounded-3xl bg-[#0a0514]/60 border border-purple-500/20 shadow-inner relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-fuchsia-500/5 to-transparent pointer-events-none" />
+        {/* Frosted Countdown Container */}
+        <div className="grid grid-cols-4 gap-3 p-5 rounded-3xl bg-black/10 border border-white/10 shadow-inner backdrop-blur-md">
           {Object.entries(timeLeft).map(([unit, val]) => (
-            <div key={unit} className="text-center relative z-10">
-              <div className="font-display text-3xl md:text-4xl text-cyan-400 font-medium tracking-tight drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+            <div key={unit} className="text-center">
+              <div className="font-serif text-3xl md:text-4xl text-white font-medium tracking-tight drop-shadow-sm">
                 {String(val).padStart(2, '0')}
               </div>
-              <div className="font-mono font-semibold text-[9px] text-purple-400/60 uppercase tracking-widest mt-1">
+              <div className="font-sans font-semibold text-[9px] text-purple-200/70 uppercase tracking-widest mt-1">
                 {unit}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-2 text-[11px] text-purple-400/40 font-mono tracking-widest">
-          <Lock size={12} className="text-cyan-500/40" />
+        <div className="mt-8 flex items-center justify-center gap-2 text-[11px] text-white/50 font-sans tracking-widest">
+          <Heart size={12} className="text-fuchsia-300/50" />
           <span>Unlocking July 31, 2026 at Midnight</span>
         </div>
       </motion.div>
