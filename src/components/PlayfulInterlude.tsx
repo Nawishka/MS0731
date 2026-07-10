@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Sparkles, Smile, MessageCircle, Flower } from 'lucide-react';
+import { Heart, Sparkles, MessageCircle, Flower2, Cloud } from 'lucide-react';
 import { audio } from '../utils/audio';
 
 interface PlayfulInterludeProps {
@@ -61,51 +61,27 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
 
   return (
     <div className="relative w-full max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[80vh] px-4 py-12" id="playful-interlude-stage">
+      
+      {/* Floating Garden Atmosphere */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
-            animate={{
-              y: [0, -40, 0],
-              x: [0, Math.sin(i) * 20, 0],
-              opacity: [0.15, 0.4, 0.15],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 5 + (i % 3) * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.4,
-            }}
-            className="absolute text-gold-400/20"
-            style={{
-              top: `${(i * 17) % 90}%`,
-              left: `${(i * 23) % 95}%`,
-            }}
+            animate={{ y: [0, -40, 0], x: [0, Math.sin(i) * 20, 0], opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
+            transition={{ duration: 6 + (i % 3) * 2, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
+            className="absolute"
+            style={{ top: `${(i * 17) % 90}%`, left: `${(i * 23) % 95}%` }}
           >
-            <Flower size={16 + (i % 2) * 8} />
+            {i % 2 === 0 ? <Flower2 size={16 + (i % 2) * 8} className="text-rose-300/40" /> : <Cloud size={20 + i * 2} className="text-white/60" />}
           </motion.div>
         ))}
-
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={`heart-${i}`}
-            animate={{
-              y: [0, -60, 0],
-              rotate: [0, 15, -15, 0],
-              opacity: [0.1, 0.35, 0.1],
-            }}
-            transition={{
-              duration: 6 + i * 1.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.7,
-            }}
-            className="absolute text-gold-500/10"
-            style={{
-              top: `${(i * 21) % 80 + 10}%`,
-              left: `${(i * 31) % 85 + 5}%`,
-            }}
+            animate={{ y: [0, -60, 0], rotate: [0, 15, -15, 0], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 7 + i * 1.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
+            className="absolute text-pink-400/20"
+            style={{ top: `${(i * 21) % 80 + 10}%`, left: `${(i * 31) % 85 + 5}%` }}
           >
             <Heart size={24} fill="currentColor" />
           </motion.div>
@@ -116,27 +92,20 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
         initial={{ opacity: 0, scale: 0.92, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 120 }}
-        className="w-full max-w-xl rounded-3xl glass-panel-dark p-8 md:p-12 text-center relative z-20 overflow-hidden shadow-[0_20px_50px_rgba(212,175,55,0.12)] border border-gold-500/25"
-        id="playful-game-card"
+        className="w-full max-w-xl rounded-[2.5rem] bg-white/60 backdrop-blur-xl p-8 md:p-12 text-center relative z-20 overflow-hidden shadow-[0_20px_50px_rgba(255,192,203,0.4)] border border-white/80"
       >
-        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
-        <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-gold-500/5 rounded-full blur-2xl" />
-        <div className="absolute -top-16 -right-16 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl" />
+        <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-rose-200/40 rounded-full blur-3xl" />
+        <div className="absolute -top-16 -right-16 w-32 h-32 bg-pink-200/40 rounded-full blur-3xl" />
 
         <AnimatePresence mode="wait">
           {!isSuccess ? (
-            <motion.div
-              key="game-play"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="space-y-8"
-            >
+            <motion.div key="game-play" initial={{ opacity: 1 }} exit={{ opacity: 0, y: -20 }} className="space-y-8">
               <div className="space-y-2">
-                <span className="font-sans text-[10px] tracking-[0.3em] text-gold-400 font-semibold uppercase flex items-center justify-center gap-1.5">
-                  <Flower size={12} className="text-gold-400" />
+                <span className="font-sans text-[10px] tracking-[0.25em] text-rose-500 font-bold uppercase flex items-center justify-center gap-1.5">
+                  <Flower2 size={12} className="text-rose-400" />
                   <span>A Quick Question</span>
                 </span>
-                <h3 className="font-display text-2xl md:text-4xl text-white tracking-wide font-semibold mt-1">
+                <h3 className="font-serif text-3xl md:text-4xl text-slate-800 font-medium mt-1">
                   Ready for Memory Lane?
                 </h3>
               </div>
@@ -145,21 +114,18 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                 <motion.div
                   animate={{ scale: [1, 1.15, 1] }}
                   transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-20 h-20 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shadow-[0_0_24px_rgba(212,175,55,0.25)] animate-pulse-gold"
+                  className="w-20 h-20 rounded-full bg-white/80 border border-rose-100 flex items-center justify-center shadow-[0_8px_25px_rgba(255,192,203,0.4)]"
                 >
-                  <Heart className="text-gold-400" size={36} fill="currentColor" />
+                  <Heart className="text-rose-400 fill-rose-50" size={36} />
                 </motion.div>
-                <div className="absolute -top-1 right-1/3 text-gold-300 animate-bounce">
+                <div className="absolute -top-1 right-1/3 text-pink-400 animate-bounce">
                   <Sparkles size={16} />
                 </div>
               </div>
 
               <div className="space-y-3">
-                <p className="font-serif italic text-2xl text-gold-100 leading-relaxed">
+                <p className="font-sans text-base text-slate-600 leading-relaxed max-w-sm mx-auto">
                   "Are you ready to take a look back at some of our favorite memories together?"
-                </p>
-                <p className="font-sans text-xs text-gold-200/45">
-                  Let's take a little walk down memory lane.
                 </p>
               </div>
 
@@ -168,24 +134,16 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handlePositiveClick}
-                  className="px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-400 text-black font-sans font-bold rounded-2xl text-xs tracking-wider uppercase shadow-[0_8px_32px_rgba(212,175,55,0.25)] hover:shadow-[0_8px_40px_rgba(212,175,55,0.45)] transition-all cursor-pointer z-30 flex items-center gap-2"
-                  id="love-yes-btn"
+                  className="px-8 py-4 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-sans font-bold rounded-2xl text-xs tracking-wider uppercase shadow-[0_8px_25px_rgba(255,192,203,0.5)] hover:shadow-[0_12px_35px_rgba(255,192,203,0.6)] transition-all cursor-pointer z-30 flex items-center gap-2"
                 >
                   <Heart size={14} fill="currentColor" />
                   <span>Yes, let's go! 💖</span>
                 </motion.button>
 
-                <motion.div
-                  animate={{ x: evasionOffset.x, y: evasionOffset.y }}
-                  transition={{ type: 'spring', damping: 10, stiffness: 180 }}
-                  className="relative z-20"
-                >
+                <motion.div animate={{ x: evasionOffset.x, y: evasionOffset.y }} transition={{ type: 'spring', damping: 10, stiffness: 180 }} className="relative z-20">
                   <button
-                    onMouseEnter={handleNegativeApproach}
-                    onTouchStart={handleNegativeApproach}
-                    onClick={handleNegativeApproach}
-                    className="px-6 py-3.5 rounded-2xl glass-panel-dark text-gold-200 hover:text-gold-400 border border-gold-500/20 hover:border-gold-400/50 hover:bg-amber-950/20 font-sans font-medium text-xs tracking-wider transition-all cursor-pointer select-none"
-                    id="love-no-btn"
+                    onMouseEnter={handleNegativeApproach} onTouchStart={handleNegativeApproach} onClick={handleNegativeApproach}
+                    className="px-6 py-3.5 rounded-2xl bg-white/50 text-rose-400 hover:text-rose-600 border border-rose-200 hover:border-rose-300 font-sans font-semibold text-xs tracking-wider transition-all cursor-pointer select-none shadow-sm"
                   >
                     No, not yet... 🤫
                   </button>
@@ -195,15 +153,11 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
                   {showTooltip && (
                     <motion.div
                       key={clickCount}
-                      initial={{ opacity: 0, scale: 0.8, y: 15 }}
-                      animate={{ opacity: 1, scale: 1, y: -45 }}
-                      exit={{ opacity: 0, scale: 0.8, y: -60 }}
-                      className="absolute bg-black/95 text-gold-300 font-sans text-[11px] font-semibold py-1.5 px-3 rounded-full border border-gold-500/35 flex items-center gap-1.5 pointer-events-none shadow-lg z-40"
-                      style={{
-                        transform: `translate(${evasionOffset.x}px, ${evasionOffset.y}px)`,
-                      }}
+                      initial={{ opacity: 0, scale: 0.8, y: 15 }} animate={{ opacity: 1, scale: 1, y: -45 }} exit={{ opacity: 0, scale: 0.8, y: -60 }}
+                      className="absolute bg-white/95 text-rose-500 font-sans text-[11px] font-bold py-2 px-4 rounded-full border border-rose-100 flex items-center gap-1.5 pointer-events-none shadow-lg z-40"
+                      style={{ transform: `translate(${evasionOffset.x}px, ${evasionOffset.y}px)` }}
                     >
-                      <MessageCircle size={10} className="text-gold-400 fill-gold-500/20" />
+                      <MessageCircle size={12} className="text-pink-400" />
                       <span>{tooltip}</span>
                     </motion.div>
                   )}
@@ -211,33 +165,19 @@ export default function PlayfulInterlude({ onSuccess, triggerBurst }: PlayfulInt
               </div>
             </motion.div>
           ) : (
-            <motion.div
-              key="game-success"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="space-y-6 py-8"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-6xl"
-              >
-                ✨💛✨
+            <motion.div key="game-success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 py-8">
+              <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="text-6xl drop-shadow-md">
+                🌸💖🌸
               </motion.div>
-              <h3 className="font-display text-3xl text-gold-300 font-bold tracking-wide">
+              <h3 className="font-serif text-3xl text-slate-800 font-medium tracking-wide">
                 I Knew You'd Say Yes! 😄
               </h3>
-              <p className="font-serif italic text-lg text-gold-100/90 max-w-sm mx-auto">
-                "Get ready for some of my absolute favorite moments with you..."
+              <p className="font-sans text-sm text-slate-500 max-w-sm mx-auto leading-relaxed">
+                Get ready for some of my absolute favorite moments with you...
               </p>
-              
               <div className="pt-4">
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="font-sans text-[10px] tracking-[0.25em] text-gold-400 uppercase font-semibold block"
-                >
-                  Loading Our Memories...
+                <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }} className="font-sans text-[10px] tracking-[0.25em] text-rose-400 uppercase font-bold block">
+                  Loading Our Story...
                 </motion.div>
               </div>
             </motion.div>
