@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Compass, HeartPulse, Sparkle } from 'lucide-react';
+import { Heart, Compass, Sparkle } from 'lucide-react';
 import { MemoryItem } from '../types';
 import { audio } from '../utils/audio';
 
@@ -11,56 +11,57 @@ interface MemoryGalleryProps {
 export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
   const [clickedHeartId, setClickedHeartId] = useState<string | null>(null);
 
+  // Exactly 4 Memories with your Sinhala text and exact photo paths!
   const memories: MemoryItem[] = [
     {
-      id: 'mem1', date: 'July 2024', title: 'Our First Big Adventure',
-      description: 'Walking together and talking for hours. Everything felt so easy and natural, and I knew right then how special you were to me.',
-      quote: '"Time always seems to fly by whenever I am with you."',
+      id: 'mem1', 
+      date: 'Feb 07, 2026', 
+      title: 'A Glance That Changed Everything',
+      description: 'මේ වෙලාව තමයි මගේ ජීවිතයෙ ලොකු වෙනසක් කලේ, එදත් මම මේ වෙලාවෙ නිකමට insta open කරේ reel එකක් බලල යන්න.. ඒත් app එක open කරපු ගමන් මම දැක්කෙ මේ පේන video එකයි ඒත් එක්කම යටින් photo collage එකයි.. අනිවාරෙන් ආයෙත් එතනට ගිහින් ඒ video ඒක බලන්න..!',
+      quote: '"Teri Nazron Ka Dil Pe Hua Hai Asar / Tu Mera Mehboob Hai Jaana"',
       gradient: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-      illustrationType: 'temple', type: 'REAL',
-      // image: '/photos/memory1.jpg',
+      illustrationType: 'temple', 
+      type: 'REAL',
+      image: '/Photos/Pic01.PNG',
     },
     {
-      id: 'mem2', date: 'October 2024', title: 'Late Night Talks & Tea',
-      description: 'Just hanging out, sipping tea, and sharing our biggest dreams and silly secrets while the world outside went quiet.',
-      quote: '"Some of my favorite memories are just the quiet moments with you."',
+      id: 'mem2', 
+      date: 'May 03, 2026', 
+      title: 'Stolen Glances & Shy Smiles',
+      description: 'කලින් දවසෙ මටත් හිනාවෙවී ඉදල අවිල්ල bus එකෙන් බැහැපු වෙලේ ඉදන් හැන්ගි හැන්ගි ඉදල අන්තිමට තංගල්ල bus එකට නැගලත් මගෙ මූනවත් බලන්නැතුව යද්දි මම ගත්ත අපි දෙන්නම ඉන්න පළවෙනි photo එක..',
+      quote: '"එදා ඒ රතුවෙලා තිබ්බ මූන, ගැහි ගැහි ලැජ්ජාවෙ බලන් හිටිය විදිය මන් හරි ආසාවෙන් බලන් ඉදියහ්..!"',
       gradient: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.1) 100%)',
-      illustrationType: 'waves', type: 'REAL',
+      illustrationType: 'waves', 
+      type: 'REAL',
+      image: '/Photos/Pic02.jpeg',
     },
     {
-      id: 'mem3', date: 'January 2025', title: 'Shelter from the Rainy Days',
-      description: 'Even when things get chaotic or stressful around us, being with you always feels like a safe, peaceful place.',
-      quote: '"You always know how to bring warmth to the rainiest days."',
+      id: 'mem3', 
+      date: 'May 03, 2026', 
+      title: 'When the World Faded Away',
+      description: 'පළමු ස්පර්ෂයම මේ විදියට capture කරගන්න පුලුවන් උන එකනම් මාර පුදුමයක්.. කෝමහරි ඒ දේත් හරි ලස්සනට capture කරගන්න පුලුවන් උනා.. ඒ මොහොත ගැනනම් අමුතුවෙන් කියන්න දෙයක් නැහ්නේ..',
+      quote: '"හරි ලස්සන feelings ගොන්නක්..!"',
       gradient: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-      illustrationType: 'constellation', type: 'REAL',
+      illustrationType: 'constellation', 
+      type: 'REAL',
+      image: '/Photos/Pic03.jpeg',
     },
     {
-      id: 'surreal-healing', date: 'Always & Forever', title: 'My Safe Haven',
-      description: 'No matter what happens in life, I always want to be someone who supports you, protects your peace, and brings you happiness.',
-      quote: '"A promise to always stand by your side through every chapter of life."',
-      gradient: 'linear-gradient(135deg, rgba(244,114,182,0.1) 0%, rgba(255,255,255,0.1) 100%)',
-      illustrationType: 'healing-pulse', type: 'SURREAL',
-    },
-    {
-      id: 'mem4', date: 'April 2025', title: 'Endless Laughter',
-      description: 'Lost in our own little world, laughing at things nobody else would understand. Your smile is genuinely my favorite thing to see.',
-      quote: '"Here is to all the inside jokes and endless laughter still ahead of us."',
+      id: 'mem4', 
+      date: 'May 03, 2026', 
+      title: "Where 'You and I' Became 'We'",
+      description: 'අපි අද මේ වෙනකන් selfies කීයක්නම් ගන්න ඇද්ද ඒත් ඒ කිසිම එකක නැති value එකක් මේකෙ තියනව.. මොකද මේ තියෙන්නෙ අපි දෙන්න ගත්ත පළවෙනි selfie එක..',
+      quote: '"The very first frame of our lifetime together."',
       gradient: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.1) 100%)',
-      illustrationType: 'stars', type: 'REAL',
-    },
-    {
-      id: 'mem5', date: 'July 31, 2026', title: 'Welcome to 18!',
-      description: 'Watching you step into adulthood with so much grace, kindness, and beauty. I am so lucky to celebrate this amazing milestone with you.',
-      quote: '"Happy 18th Birthday, Shashi! The best is yet to come."',
-      gradient: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-      illustrationType: 'heart', type: 'REAL',
-    },
+      illustrationType: 'stars', 
+      type: 'REAL',
+      image: '/Photos/Pic04.jpeg',
+    }
   ];
 
   const triggerHeartBurst = (id: string) => {
     setClickedHeartId(id);
-    if (id === 'surreal-healing') audio.playHeartbeat();
-    else audio.playGoldenChime();
+    audio.playGoldenChime();
     setTimeout(() => setClickedHeartId(null), 1000);
   };
 
@@ -93,27 +94,12 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
             <circle cx="100" cy="100" r="60" stroke="#ffffff" strokeWidth="1" strokeDasharray="2 4" />
           </svg>
         );
-      case 'healing-pulse':
-        return (
-          <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-            <div className="absolute w-44 h-44 rounded-full border border-white/50 animate-ping" style={{ animationDuration: '3s' }} />
-            <svg className="w-full h-full opacity-80" viewBox="0 0 300 200" fill="none">
-              <path d="M10,100 L80,100 L95,80 L105,130 L115,100 L140,100 L155,50 L170,160 L185,100 L210,100 L290,100" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        );
       case 'stars':
         return (
           <svg className="w-full h-full opacity-60" viewBox="0 0 200 200" fill="none">
             <polygon points="100,40 105,55 120,55 108,65 112,80 100,70 88,80 92,65 80,55 95,55" fill="#ffffff" />
             <circle cx="100" cy="60" r="40" stroke="#fbcfe8" strokeWidth="1" />
             <line x1="40" y1="60" x2="160" y2="60" stroke="#fbcfe8" strokeWidth="1" opacity="0.5" />
-          </svg>
-        );
-      case 'heart':
-        return (
-          <svg className="w-full h-full opacity-70 animate-float-medium" viewBox="0 0 200 200" fill="none">
-            <path d="M100,140 C100,140 40,90 40,55 C40,30 60,15 80,15 C92,15 100,25 100,25 C100,25 108,15 120,15 C140,15 160,30 160,55 C160,90 100,140 100,140 Z" stroke="#ffffff" strokeWidth="1.5" fill="rgba(255,255,255,0.15)" />
           </svg>
         );
       default: return null;
@@ -141,7 +127,6 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
         
         {memories.map((item, index) => {
           const isLeft = index % 2 === 0;
-          const isSurreal = item.type === 'SURREAL';
 
           return (
             <motion.div
@@ -154,9 +139,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
                 <motion.div
                   whileHover={{ scale: 1.02, rotateY: isLeft ? 3 : -3, rotateX: 2, boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}
                   transition={{ type: 'spring', damping: 15, stiffness: 150 }}
-                  className={`w-full max-w-[380px] rounded-[2rem] overflow-hidden shadow-[0_8px_32px_rgba(31,38,135,0.37)] border ${
-                    isSurreal ? 'bg-white/15 border-white/40 backdrop-blur-2xl' : 'bg-white/10 backdrop-blur-xl border-white/20'
-                  }`}
+                  className="w-full max-w-[380px] rounded-[2rem] overflow-hidden shadow-[0_8px_32px_rgba(31,38,135,0.37)] border bg-white/10 backdrop-blur-xl border-white/20"
                 >
                   <div className="relative w-full aspect-[4/3] flex items-center justify-center overflow-hidden border-b border-white/10" style={{ background: item.gradient }}>
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -185,13 +168,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
                   </div>
                   <div className="p-6 md:p-8 space-y-4 relative">
                     <div className="flex items-center gap-2 relative z-10">
-                      {isSurreal ? (
-                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 border border-white/30 text-[9px] font-sans font-bold uppercase text-white tracking-wider shadow-sm backdrop-blur-md">
-                          <HeartPulse size={10} className="animate-pulse" /><span>Special Promise</span>
-                        </div>
-                      ) : (
-                        <span className="font-sans font-semibold text-[9px] text-white/60 uppercase tracking-[0.2em]">Milestone Memory</span>
-                      )}
+                      <span className="font-sans font-semibold text-[9px] text-white/60 uppercase tracking-[0.2em]">Milestone Memory</span>
                     </div>
                     <h4 className="font-serif text-xl md:text-2xl text-white font-medium tracking-wide relative z-10 drop-shadow-sm">{item.title}</h4>
                     <p className="font-sans text-xs md:text-sm text-purple-100/80 leading-relaxed relative z-10">{item.description}</p>
