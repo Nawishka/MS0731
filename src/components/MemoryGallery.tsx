@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Compass, Sparkle } from 'lucide-react';
+import { Heart, Compass, Sparkle, Clock } from 'lucide-react';
 import { MemoryItem } from '../types';
 import { audio } from '../utils/audio';
 
@@ -8,14 +8,18 @@ interface MemoryGalleryProps {
   onProceed: () => void;
 }
 
+// We extend your MemoryItem type right here so we can add the exact precise second!
+type ExactMemoryItem = MemoryItem & { exactTime: string };
+
 export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
   const [burstHeartId, setBurstHeartId] = useState<string | null>(null);
   const [likedHearts, setLikedHearts] = useState<string[]>([]);
 
-  const memories: MemoryItem[] = [
+  const memories: ExactMemoryItem[] = [
     {
       id: 'mem1', 
       date: 'Feb 07, 2026', 
+      exactTime: '4:35:10 PM',
       title: 'A Glance That Changed Everything',
       description: 'මේ වෙලාව තමයි මගේ ජීවිතයෙ ලොකු වෙනසක් කලේ, එදත් මම මේ වෙලාවෙ නිකමට insta open කරේ reel එකක් බලල යන්න.. ඒත් app එක open කරපු ගමන් මම දැක්කෙ මේ පේන video එකයි ඒත් එක්කම යටින් photo collage එකයි.. ඒක දැක්ක ගමන් මම ආපු වැඩෙත් අමතක වෙල් බලන් ඉදියෙ ඒ විඩියෝ එකේ ඉන්න ලස්සන කෙල්ලයි ඒ ලස්සන සින්දුවයි මට දුන්න ලස්සන හැඟීම දිහා.. අදටත් ඒ සින්දුවේ මේ කොටස මට ඒ ලස්සන මොහොත මතක් කරනවා..\n\nඅනිවාරෙන් ආයෙත් එතනට ගිහින් ඒ video ඒක බලන්න..!',
       quote: `"Teri Nazron Ka Dil Pe Hua Hai Asar\nTu Mera Mehboob Hai Jaana\nTeri Ulfat Mein Jeeta Har Pal\nTu Ik Tohfa Hai Khuda Ka\n\nTujhe Pa Ke Jawab Mila Hai Asal\nTu Hai Woh Sawaal Khuda Ka\nTu Mila Hai Yeh Meri Dua Ka Asar\nTu Mujhse Door Na Jaana"`,
@@ -27,6 +31,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
     {
       id: 'mem2', 
       date: 'May 03, 2026', 
+      exactTime: '9:24:47 AM',
       title: 'Stolen Glances & Shy Smiles',
       description: 'කලින් දවසෙ මටත් හිනාවෙවී ඉදල අවිල්ල bus එකෙන් බැහැපු වෙලේ ඉදන් හැන්ගි හැන්ගි ඉදල අන්තිමට තංගල්ල bus එකට නැගලත් මගෙ මූනවත් බලන්නැතුව යද්දි මම ගත්ත අපි දෙන්නම ඉන්න පළවෙනි photo එක.. එදා ඒ රතුවෙලා තිබ්බ මූන, ගැහි ගැහි ලැජ්ජාවෙ අනිත් පැත්ත බලන් එන විදිය මන් හරි ආසාවෙන් බලන් ඉදියහ්..!',
       quote: '"එදා ඒ රතුවෙලා තිබ්බ මූන, ගැහි ගැහි ලැජ්ජාවෙ බලන් හිටිය විදිය මන් හරි ආසාවෙන් බලන් ඉදියහ්..!"',
@@ -38,6 +43,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
     {
       id: 'mem3', 
       date: 'May 03, 2026', 
+      exactTime: '10:25:46 AM',
       title: 'When the World Faded Away',
       description: 'පළමු ස්පර්ෂයම මේ විදියට capture කරගන්න පුලුවන් උන එකනම් මාර පුදුමයක්.. කෝමහරි ඒ දේත් හරි ලස්සනට capture කරගන්න පුලුවන් උනා.. ඒ මොහොත ගැනනම් අමුතුවෙන් කියන්න දෙයක් නැහ්නේ.. හරි ලස්සන feelings ගොන්නක්..!',
       quote: '"හරි ලස්සන feelings ගොන්නක්..!"',
@@ -49,6 +55,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
     {
       id: 'mem4', 
       date: 'May 03, 2026', 
+      exactTime: '10:36:25 AM',
       title: "Where 'You and I' Became 'We'",
       description: 'අපි අද මේ වෙනකන් selfies කීයක්නම් ගන්න ඇද්ද ඒත් ඒ කිසිම එකක නැති value එකක් මේකෙ තියනව.. මොකද මේ තියෙන්නෙ අපි දෙන්න ගත්ත පළවෙනි selfie එක..',
       quote: '"The very first frame of our lifetime together."',
@@ -123,7 +130,7 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
           Our Magical Memories
         </h2>
         <p className="font-sans text-sm text-purple-100/80 leading-relaxed max-w-md mx-auto">
-          Looking back at some of my favorite times with you, from the quiet laughs to the big milestones in our enchanted world.
+          Looking back at some of my favorite times with you, down to the exact second these beautiful moments were frozen in time.
         </p>
       </div>
 
@@ -156,15 +163,26 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
                         <div className="absolute inset-4 flex items-center justify-center">{renderIllustration(item.illustrationType)}</div>
                       )}
                     </div>
+                    
+                    {/* Glowing Heart Button */}
                     <button
                       onClick={() => triggerHeartBurst(item.id)}
                       className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/20 shadow-sm hover:bg-white/20 border border-white/30 flex items-center justify-center group/btn transition-transform active:scale-90 z-10 backdrop-blur-md"
                     >
                       <Heart className={`text-white group-hover/btn:scale-110 transition-all drop-shadow-sm ${isLiked || isBursting ? 'scale-125 fill-white' : ''}`} size={16} fill={isLiked || isBursting ? 'currentColor' : 'none'} />
                     </button>
-                    <span className="absolute top-4 left-4 py-1.5 px-3 rounded-full bg-black/20 backdrop-blur-md border border-white/20 font-sans font-bold text-[9px] text-white uppercase tracking-widest z-10 shadow-sm drop-shadow-sm">
-                      {item.date}
-                    </span>
+                    
+                    {/* Exact Time & Date Floating Badges */}
+                    <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+                      <span className="py-1 px-3 rounded-full bg-black/40 backdrop-blur-md border border-white/20 font-sans font-bold text-[9px] text-white uppercase tracking-widest shadow-sm drop-shadow-sm w-fit">
+                        {item.date}
+                      </span>
+                      <div className="py-1 px-3 rounded-full bg-fuchsia-900/60 backdrop-blur-md border border-fuchsia-400/50 font-mono font-bold text-[9.5px] text-fuchsia-50 tracking-widest shadow-[0_0_15px_rgba(217,70,239,0.5)] flex items-center gap-1.5 w-fit">
+                        <Clock size={10} className="text-fuchsia-300 animate-pulse" />
+                        <span>{item.exactTime}</span>
+                      </div>
+                    </div>
+
                     <AnimatePresence>
                       {isBursting && [...Array(6)].map((_, pi) => (
                         <motion.div key={pi} initial={{ x: 120, y: 110, opacity: 1, scale: 0.5 }} animate={{ x: 120 + (Math.random() * 80 - 40), y: 110 - (Math.random() * 80 + 30), opacity: 0, scale: 1.2, rotate: Math.random() * 45 - 22.5 }} exit={{ opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }} className="absolute text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] pointer-events-none z-20">
@@ -178,25 +196,30 @@ export default function MemoryGallery({ onProceed }: MemoryGalleryProps) {
                       <span className="font-sans font-semibold text-[9px] text-white/60 uppercase tracking-[0.2em]">Milestone Memory</span>
                     </div>
                     <h4 className="font-serif text-xl md:text-2xl text-white font-medium tracking-wide relative z-10 drop-shadow-sm">{item.title}</h4>
-                    {/* Added whitespace-pre-line to description for perfect line breaks */}
                     <p className="font-sans text-xs md:text-sm text-purple-100/80 leading-relaxed relative z-10 whitespace-pre-line">{item.description}</p>
                     <div className="relative pt-4 border-t border-white/10 z-10">
-                      <p className="font-sans italic text-xs text-white/70 leading-relaxed pr-6 pl-3 border-l-2 border-white/40 whitespace-pre-line">
+                      <p className="font-sans italic text-xs text-white/70 leading-relaxed pr-6 pl-3 border-l-2 border-fuchsia-400/50 whitespace-pre-line">
                         {item.quote}
                       </p>
-                      <Sparkle className="absolute right-0 bottom-0 text-white/40 animate-pulse" size={14} />
+                      <Sparkle className="absolute right-0 bottom-0 text-fuchsia-300/40 animate-pulse" size={14} />
                     </div>
                   </div>
                 </motion.div>
               </div>
 
+              {/* Desktop Center Timeline Badges */}
               <div className="w-full md:w-1/2 hidden md:flex flex-col items-center justify-center p-6 text-center select-none">
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} className="w-10 h-10 rounded-full border border-white/30 bg-black/10 backdrop-blur-md flex items-center justify-center relative shadow-sm">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} className="w-10 h-10 rounded-full border border-fuchsia-400/40 bg-black/20 backdrop-blur-md flex items-center justify-center relative shadow-[0_0_15px_rgba(217,70,239,0.2)]">
                   <div className="w-3 h-3 rounded-full bg-white animate-pulse drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]" />
-                  <div className="absolute inset-0 rounded-full border border-white/40 animate-ping opacity-30" style={{ animationDuration: '3s' }} />
+                  <div className="absolute inset-0 rounded-full border border-fuchsia-400/50 animate-ping opacity-40" style={{ animationDuration: '3s' }} />
                 </motion.div>
-                <div className="mt-4 font-sans font-bold text-[10px] text-white/60 uppercase tracking-[0.2em]">
-                  {item.date}
+                <div className="mt-4 flex flex-col items-center gap-1.5">
+                  <span className="font-sans font-bold text-[10px] text-white/60 uppercase tracking-[0.2em]">
+                    {item.date}
+                  </span>
+                  <span className="font-mono font-bold text-[11px] text-fuchsia-200 drop-shadow-[0_0_8px_rgba(217,70,239,0.6)]">
+                    {item.exactTime}
+                  </span>
                 </div>
               </div>
             </motion.div>
