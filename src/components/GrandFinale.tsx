@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'react';
 import { Heart, Sparkles, Flower2, Gift } from 'lucide-react';
 import { audio } from '../utils/audio';
 
@@ -26,7 +26,7 @@ export default function GrandFinale() {
   };
 
   return (
-    <div className="relative w-full min-h-[85vh] flex flex-col items-center justify-center p-4 select-none" id="grand-finale-stage">
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4 py-12 select-none" id="grand-finale-stage">
       
       {/* 🌟 Floating Background Elements just for this page 🌟 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -54,7 +54,7 @@ export default function GrandFinale() {
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1.5, type: 'spring', damping: 20 }}
-        className="w-full max-w-2xl bg-white/10 backdrop-blur-2xl rounded-[3rem] p-8 md:p-14 text-center border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative overflow-hidden z-10"
+        className="w-full max-w-3xl bg-white/10 backdrop-blur-2xl rounded-[3rem] p-6 md:p-12 text-center border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative overflow-hidden z-10 my-8"
       >
         <div className="absolute -top-20 -left-20 w-48 h-48 bg-fuchsia-400/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
@@ -71,20 +71,53 @@ export default function GrandFinale() {
           LEVEL 18 UNLOCKED
         </span>
         
-        <h1 className="font-serif text-4xl md:text-5xl text-white font-medium mb-8 drop-shadow-md tracking-wide">
+        <h1 className="font-serif text-4xl md:text-5xl text-white font-medium mb-10 drop-shadow-md tracking-wide">
           Happy Birthday, Shashi!
         </h1>
         
-        <div className="space-y-6 font-sans text-sm md:text-base text-purple-50/90 leading-relaxed max-w-lg mx-auto relative z-10">
+        {/* Beautifully Formatted Sinhala Letter */}
+        <div className="space-y-5 font-sans text-[13px] md:text-[15px] text-purple-50/90 leading-relaxed max-w-xl mx-auto relative z-10 text-justify px-2 md:px-0">
           <p>
-            You finally made it to 18! Watching you grow into the amazing, beautiful person you are today has been the greatest privilege. 
+            මම මේක ලියන්න දවස් ගානක් නෙමෙයි මාස දෙකක් විතරම කල්පනා කිව්වොත් හරි ඒත් ලියන්න වෙලාව ආවම මොනා ලියන්න ද කියල හිතාගන්න බැහ්.. ඒත් කොල ගනන් ලියන සිංහල විචාරයක් වගේ ලියන්න බැරි නිසා මං මේක මේ විදියට පටන්ගන්නම්.. 
           </p>
           <p>
-            Thank you for being my safe haven, for the endless laughter, and for making every single day brighter just by being in it. Welcome to the best chapter of your life yet.
+            ඔයා.. ඔයා කියන්නෙ මට මගෙ ජිවිතෙ හම්බුන වටිනම තෝරාගැනීම.. මොකද අපෙ වටේ ඉන්න අනිත් හැමෝම අපිට ලැබුන දේවල් අම්ම තාත්ත සහෝදර සහෝදරියො මේ කිසිදෙයක් අපේ තේරිම් නෙවෙයි. ඉතින් අපි තේරිමක් කරල ආදරය කරන පළවෙනි වතාව.. අපේ ජිවිතේ ලස්සන වෙන්නෙත් නැතිවෙන්නෙත් අපේම තේරීම් නිසා ඉතින් මට සතුටුයි මම partner කෙනෙක් තෝරද්දි කරන තේරීම හරියටම කරල තියන හින්ද..
+          </p>
+          
+          <div className="text-left pl-2 md:pl-4">
+            <p className="mb-2">මොකද ඔයා කියන්නෙ,</p>
+            <ul className="space-y-1.5 text-fuchsia-100/90 ml-2 border-l-2 border-white/20 pl-4">
+              <li>• ලස්සන හදවතක් තියන</li>
+              <li>• ලස්සන අදහස් තියන</li>
+              <li>• උණුවෙන හිතක් තියෙන</li>
+              <li>• තමන්ගෙ අය වෙනුවෙන් ඕන වෙලාවක පෙනී ඉන්න</li>
+              <li>• පොඩි දේටත් දුක හිතෙන</li>
+              <li>• පිරිසිදු හිතක් තියන</li>
+              <li>• ආදරණීය හිනාවක් තියන</li>
+              <li>• වශීවෙන ඇස් තියෙන</li>
+              <li>• ලස්සන, හුරුබුහුටි, ඒ වගේම කියවන්න ගියාමත් නවත්තන්නෙ නැති බුද්ධිමත් කෙල්ලෙක්..</li>
+            </ul>
+          </div>
+
+          <p>
+            ඉතින් මන් අහන්නෙ මං හරිම තේරිම කරල නැද්ද? <br/>
+            මං හරි lucky ඔයා වගෙ කෙනෙක්ව මගේ කරගන්න හම්බුන එක ගැන..
           </p>
           <p>
-            I can't wait to see all the incredible things you are going to do, and I promise to be right here cheering you on every step of the way.
+            කලින් ඔයා දැක්ක වගේම එදා insta එකේ දැකපු රෝස මලක් වගේ කෙල්ල හීනෙකින්වත් හිතපු නැති විදියකට මගේ වෙලහ්. මතකද අපි හම්බුන පළවෙනි දවසෙ ඔයා බයේ හැන්ගි හැන්ගි ඉදපු විදිය.. ඒ මතක කවදාවත් අපේ හිත්වලින් යන එකක් නැහ් කොහොමින් කොහොම හරී.. <br/>
+            ඉතින් අද ඒ මගේ buubuට අවුරුදු 18ක් පිරිලහ්.. 
           </p>
+          <p>
+            ඉතින් අදින් පටන්ගන්න මෙ අලුත් චාරිකාව ලස්සන අත්දැකීම් ගොන්නක් එකතුවෙන ජීවිතේ ඔයාගෙ හීනෙට යන්න පුලුවන් වෙන චාරිකාවක් වෙයි.. මොකද මම දන්නව ඔයාට ඒ හීනෙට යන්න පුලුවන් කියල.. මම ඒක විශ්වාස කරනව.. මොකද මගේ buubu කියන්නෙ මාර ශක්තිමත් කෙල්ලෙක්!
+          </p>
+          <p>
+            ඉතින් කොච්චර දේවල් කියන්න හිතේ තිබ්බත් මේක මේ විදියට අවසාන කරන්න වෙනව,
+          </p>
+          <div className="text-center font-semibold text-fuchsia-200 text-sm md:text-base pt-4 drop-shadow-sm">
+            <p>ඔය හිනාව, ඔය කටහඬ, ඔයාගෙ පිස්සු කතා, තේරුම් ගැනීම.. supportiveness එකට, ඔයාට මම හරි ආදරෙයි සුදූ..</p>
+            <p className="mt-2 text-white">Happy Birthday mage buubu! ❤️</p>
+            <p className="mt-1">හැමදාමත් සතුටින්, පරිස්සමින්, ඉන්න.. ආදරෙයි! ❤️</p>
+          </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 relative z-10">
