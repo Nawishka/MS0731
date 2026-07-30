@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Heart, Sparkles, Flower2, Gift } from 'lucide-react';
 import { audio } from '../utils/audio';
 
