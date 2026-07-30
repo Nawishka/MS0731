@@ -165,8 +165,8 @@ export default function GrandFinale() {
                   animate={{ 
                     opacity: [0, 1, 1, 0], 
                     scale: Math.random() * 1.5 + 0.8,
-                    x: (Math.random() - 0.5) * window.innerWidth, 
-                    y: (Math.random() - 0.5) * window.innerHeight 
+                    x: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
+                    y: (Math.random() - 0.5) * (typeof window !== 'undefined' ? window.innerHeight : 1000) 
                   }}
                   transition={{ duration: 3 + Math.random() * 2, delay: Math.random() * 0.5, ease: 'easeOut', repeat: Infinity }}
                   className="absolute top-1/2 left-1/2 text-3xl md:text-5xl drop-shadow-lg"
